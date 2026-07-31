@@ -75,10 +75,6 @@ const navItems = [
     cursor: pointer;
   }
 
-  @media (min-width: 1024px) {
-    .mobile-menu-btn { display: none; }
-  }
-
   .drawer-overlay {
     position: fixed;
     inset: 0;
@@ -113,6 +109,12 @@ const navItems = [
 
   .mobile-drawer.open {
     transform: translateX(0);
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu-btn { display: none !important; }
+    .mobile-drawer { display: none !important; }
+    .drawer-overlay { display: none !important; }
   }
 
   .drawer-header {
