@@ -19,17 +19,25 @@ const navItems = [
 <button 
   id="drawer-open-btn" 
   class="mobile-menu-btn" 
-  aria-label="Open Mobile Menu"
+  aria-label="Open Mobile Navigation Menu"
   aria-expanded="false"
+  aria-controls="mobile-drawer"
 >
   <MdIcon name="menu" size="24px" />
 </button>
 
 <div id="drawer-overlay" class="drawer-overlay" aria-hidden="true"></div>
 
-<aside id="mobile-drawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+<div 
+  id="mobile-drawer" 
+  class="mobile-drawer" 
+  role="dialog" 
+  aria-modal="true" 
+  aria-label="Mobile Navigation Drawer"
+  aria-hidden="true"
+>
   <div class="drawer-header">
-    <a href={getUrl('/')} class="drawer-logo">
+    <a href={getUrl('/')} class="drawer-logo" aria-label="NI18 Mobile Navigation Homepage Logo">
       <img src={getUrl('/images/logo.svg')} alt="NI18 Logo" width="120" height="30" />
     </a>
     <button id="drawer-close-btn" class="drawer-close-btn" aria-label="Close Mobile Menu">
@@ -37,7 +45,7 @@ const navItems = [
     </button>
   </div>
 
-  <nav class="drawer-nav">
+  <nav class="drawer-nav" aria-label="Mobile Drawer Navigation Menu">
     <ul>
       {navItems.map((item) => {
         const fullHref = getUrl(item.href);
@@ -59,7 +67,7 @@ const navItems = [
       Google Play Console
     </MdButton>
   </div>
-</aside>
+</div>
 
 <style>
   .mobile-menu-btn {
@@ -178,6 +186,7 @@ const navItems = [
   function openDrawer() {
     drawer?.classList.add('open');
     overlay?.classList.add('open');
+    drawer?.setAttribute('aria-hidden', 'false');
     openBtn?.setAttribute('aria-expanded', 'true');
     overlay?.setAttribute('aria-hidden', 'false');
   }
@@ -185,6 +194,7 @@ const navItems = [
   function closeDrawer() {
     drawer?.classList.remove('open');
     overlay?.classList.remove('open');
+    drawer?.setAttribute('aria-hidden', 'true');
     openBtn?.setAttribute('aria-expanded', 'false');
     overlay?.setAttribute('aria-hidden', 'true');
   }
