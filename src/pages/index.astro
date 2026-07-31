@@ -7,6 +7,7 @@ import MdBadge from '../components/md3/MdBadge.astro';
 import MdIcon from '../components/md3/MdIcon.astro';
 import BlogCard from '../components/blog/BlogCard.astro';
 import FAQSection from '../components/sections/FAQSection.astro';
+import { getUrl } from '../utils/navigation';
 
 const apps = await getCollection('apps');
 apps.sort((a, b) => a.data.order - b.data.order);
@@ -38,7 +39,7 @@ const featuredPosts = recentPosts.slice(0, 3);
         </p>
 
         <div class="hero-actions">
-          <MdButton href="/apps" variant="filled">
+          <MdButton href={getUrl('/apps')} variant="filled">
             <span>Explore All Apps</span>
             <MdIcon name="arrow_forward" size="18px" />
           </MdButton>
@@ -68,7 +69,7 @@ const featuredPosts = recentPosts.slice(0, 3);
 
       <div class="hero-media">
         <img 
-          src="/images/hero-illustration.svg" 
+          src={getUrl('/images/hero-illustration.svg')} 
           alt="NI18 Android Mobile Apps Showcase" 
           width="600" 
           height="400"
@@ -92,7 +93,7 @@ const featuredPosts = recentPosts.slice(0, 3);
 
       <div class="grid-2">
         {apps.map((app) => (
-          <MdCard href={`/apps/${app.slug}`} variant="interactive" class="app-card">
+          <MdCard href={getUrl(`/apps/${app.slug}`)} variant="interactive" class="app-card">
             <div class="app-card-top">
               <div class="app-icon">
                 <MdIcon name={app.data.icon} size="36px" />

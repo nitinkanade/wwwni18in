@@ -6,6 +6,7 @@ import MdButton from '../../../components/md3/MdButton.astro';
 import MdBadge from '../../../components/md3/MdBadge.astro';
 import MdIcon from '../../../components/md3/MdIcon.astro';
 import BlogCard from '../../../components/blog/BlogCard.astro';
+import { getUrl } from '../../../utils/navigation';
 
 export async function getStaticPaths() {
   const apps = await getCollection('apps');
@@ -60,7 +61,7 @@ appBlogs.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
               <span>Get on Google Play</span>
             </MdButton>
             {appBlogs.length > 0 && (
-              <MdButton href={`/apps/${app.slug}/blog`} variant="outlined">
+              <MdButton href={getUrl(`/apps/${app.slug}/blog`)} variant="outlined">
                 <MdIcon name="article" size="20px" />
                 <span>View App Blogs ({appBlogs.length})</span>
               </MdButton>

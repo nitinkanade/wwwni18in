@@ -5,6 +5,7 @@ import Breadcrumb from '../../components/common/Breadcrumb.astro';
 import BlogCard from '../../components/blog/BlogCard.astro';
 import MdChip from '../../components/md3/MdChip.astro';
 import Pagination from '../../components/common/Pagination.astro';
+import { getUrl } from '../../utils/navigation';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -14,8 +15,6 @@ const apps = await getCollection('apps');
 const PAGE_SIZE = 6;
 const paginatedPosts = posts.slice(0, PAGE_SIZE);
 const totalPages = Math.ceil(posts.length / PAGE_SIZE);
-
-const categories = [...new Set(posts.map((p) => p.data.category))];
 ---
 
 <BaseLayout 
@@ -32,7 +31,7 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
         <span class="label-large">Filter by App:</span>
         <div class="chips-group">
           {apps.map((app) => (
-            <MdChip href={`/apps/${app.slug}/blog`}>
+            <MdChip href={getUrl(`/apps/${app.slug}/blog`)}>
               {app.data.title}
             </MdChip>
           ))}

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MdButton from '../components/md3/MdButton.astro';
 import MdIcon from '../components/md3/MdIcon.astro';
+import { getUrl } from '../utils/navigation';
 ---
 
 <BaseLayout 
@@ -17,11 +18,11 @@ import MdIcon from '../components/md3/MdIcon.astro';
       </p>
 
       <div class="error-actions">
-        <MdButton href="/apps" variant="filled">
+        <MdButton href={getUrl('/apps')} variant="filled">
           <MdIcon name="smartphone" size="18px" />
           <span>Explore Android Apps</span>
         </MdButton>
-        <MdButton href="/" variant="outlined">
+        <MdButton href={getUrl('/')} variant="outlined">
           <MdIcon name="home" size="18px" />
           <span>Return Home</span>
         </MdButton>
@@ -33,23 +34,24 @@ import MdIcon from '../components/md3/MdIcon.astro';
 <!-- Client-side Redirect Matcher for legacy Google Sites URLs -->
 <script is:inline>
   (function() {
-    const path = window.location.pathname.toLowerCase();
+    const rawPath = window.location.pathname.toLowerCase();
+    const path = rawPath.replace('/wwwni18in', '');
     const mappings = {
-      '/view/ni18/home': '/',
-      '/view/ni18/home/': '/',
-      '/view/ni18/about': '/about',
-      '/view/ni18/about/': '/about',
-      '/view/ni18/services': '/apps',
-      '/view/ni18/services/': '/apps',
-      '/view/ni18/contact': '/contact',
-      '/view/ni18/contact/': '/contact',
-      '/services': '/apps',
-      '/services/': '/apps',
-      '/products': '/apps',
-      '/products/': '/apps',
-      '/case-studies': '/apps',
-      '/case-studies/': '/apps',
-      '/view/ni18': '/'
+      '/view/ni18/home': '/wwwni18in/',
+      '/view/ni18/home/': '/wwwni18in/',
+      '/view/ni18/about': '/wwwni18in/about',
+      '/view/ni18/about/': '/wwwni18in/about',
+      '/view/ni18/services': '/wwwni18in/apps',
+      '/view/ni18/services/': '/wwwni18in/apps',
+      '/view/ni18/contact': '/wwwni18in/contact',
+      '/view/ni18/contact/': '/wwwni18in/contact',
+      '/services': '/wwwni18in/apps',
+      '/services/': '/wwwni18in/apps',
+      '/products': '/wwwni18in/apps',
+      '/products/': '/wwwni18in/apps',
+      '/case-studies': '/wwwni18in/apps',
+      '/case-studies/': '/wwwni18in/apps',
+      '/view/ni18': '/wwwni18in/'
     };
 
     if (mappings[path]) {
