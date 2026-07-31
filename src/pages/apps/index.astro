@@ -9,56 +9,122 @@ import { getUrl } from '../../utils/navigation';
 
 const apps = await getCollection('apps');
 apps.sort((a, b) => a.data.order - b.data.order);
+
+const categories = ['All', 'Competitive Exams', 'Exam Preparation', 'Language Learning', 'Productivity', 'Developer Tools', 'Casual Game', 'Puzzle Game', 'Educational & Trivia'];
 ---
 
 <BaseLayout 
   title="Android Mobile Apps Directory | NI18"
-  description="Official Google Play Android applications catalog published by NI18. Download apps for JEE Maths, MPSC Exams, and English Grammar."
+  description="Official Google Play Android applications catalog published by NI18. Explore all 14 apps for JEE Maths, MPSC Exams, English Grammar, AI Prompts, and Games."
 >
   <section class="section page-header">
     <div class="container">
       <Breadcrumb items={[{ name: 'Apps Directory' }]} />
-      <h1 class="display-large">NI18 Android Mobile Apps</h1>
-      <p class="body-large sub-desc">Explore our full suite of native Android applications available on Google Play.</p>
+      <h1 class="display-large">NI18 Android Mobile Apps ({apps.length})</h1>
+      <p class="body-large sub-desc">Explore our full catalog of native Android applications published on Google Play.</p>
+      
+      <!-- Filter Chips -->
+      <div class="filter-chips-wrapper">
+        {categories.map((cat, idx) => (
+          <button 
+            class={`filter-chip ${idx === 0 ? 'active' : ''}`}
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container grid-2">
+    <div class="container grid-2" id="apps-grid">
       {apps.map((app) => (
-        <MdCard href={getUrl(`/apps/${app.slug}`)} variant="interactive" class="app-card">
-          <div class="app-card-top">
-            <div class="app-icon">
-              <MdIcon name={app.data.icon} size="36px" />
+        <div class="app-card-wrapper" data-category={app.data.category}>
+          <MdCard href={getUrl(`/apps/${app.slug}`)} variant="interactive" class="app-card">
+            <div class="app-card-top">
+              <div class="app-icon">
+                <MdIcon name={app.data.icon} size="36px" />
+              </div>
+              <div class="app-meta">
+                <MdBadge>{app.data.category}</MdBadge>
+                <h2 class="title-large app-title">{app.data.title}</h2>
+                <p class="body-medium tagline">{app.data.tagline}</p>
+              </div>
             </div>
-            <div class="app-meta">
-              <MdBadge>{app.data.category}</MdBadge>
-              <h2 class="title-large app-title">{app.data.title}</h2>
-              <p class="body-medium">{app.data.tagline}</p>
-            </div>
-          </div>
 
-          <p class="body-small app-desc">{app.data.description}</p>
+            <p class="body-small app-desc">{app.data.description}</p>
 
-          <div class="app-footer-row">
-            <div class="stat-group">
-              <span class="rating"><MdIcon name="star" size="16px" /> {app.data.rating}</span>
-              <span class="downloads"><MdIcon name="download" size="16px" /> {app.data.downloads}</span>
+            <div class="app-footer-row">
+              <div class="stat-group">
+                <span class="rating"><MdIcon name="star" size="16px" /> {app.data.rating}</span>
+                <span class="downloads"><MdIcon name="download" size="16px" /> {app.data.downloads}</span>
+              </div>
+              <div class="view-link">
+                <span>App Details &amp; Guides</span>
+                <MdIcon name="chevron_right" size="18px" />
+              </div>
             </div>
-            <div class="view-link">
-              <span>App Details &amp; Blogs</span>
-              <MdIcon name="chevron_right" size="18px" />
-            </div>
-          </div>
-        </MdCard>
+          </MdCard>
+        </div>
       ))}
     </div>
   </section>
 </BaseLayout>
 
+<script is:inline>
+  const chips = document.querySelectorAll('.filter-chip');
+  const appCards = document.querySelectorAll('.app-card-wrapper');
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+
+      const selectedCategory = chip.getAttribute('data-category');
+
+      appCards.forEach((card) => {
+        const cardCategory = card.getAttribute('data-category');
+        if (selectedCategory === 'All' || cardCategory === selectedCategory) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 <style>
-  .page-header { background-color: var(--md-sys-color-surface-container-low); }
-  .sub-desc { margin-top: 0.75rem; }
+  .page-header { background-color: var(--md-sys-color-surface-container-low); padding-bottom: 2.5rem; }
+  .sub-desc { margin-top: 0.75rem; margin-bottom: 1.5rem; }
+  
+  .filter-chips-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .filter-chip {
+    padding: 0.4rem 1rem;
+    border-radius: var(--md-sys-shape-corner-full);
+    border: 1px solid var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface-container-lowest);
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-chip:hover, .filter-chip.active {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-color: var(--md-sys-color-primary);
+  }
+
+  .app-card-wrapper { display: block; }
   .app-card-top { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1rem; }
   .app-icon {
     width: 64px;
@@ -71,7 +137,8 @@ apps.sort((a, b) => a.data.order - b.data.order);
     justify-content: center;
     flex-shrink: 0;
   }
-  .app-title { margin-top: 0.25rem; margin-bottom: 0.35rem; }
+  .app-title { margin-top: 0.25rem; margin-bottom: 0.35rem; color: var(--md-sys-color-on-surface); }
+  .tagline { color: var(--md-sys-color-on-surface-variant); font-size: 0.9rem; }
   .app-desc { margin-bottom: 1.5rem; color: var(--md-sys-color-on-surface-variant); }
   .app-footer-row {
     margin-top: auto;
