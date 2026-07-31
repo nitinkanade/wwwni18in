@@ -3,45 +3,33 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/common/Breadcrumb.astro';
 
-const blogPosts = await getCollection('blog');
-const services = await getCollection('services');
-const products = await getCollection('products');
 const apps = await getCollection('apps');
-const caseStudies = await getCollection('case-studies');
-const careers = await getCollection('careers');
+const blogPosts = await getCollection('blog');
 
 const staticPages = [
   { name: 'Home', href: '/' },
-  { name: 'About NI18', href: '/about' },
-  { name: 'Services Overview', href: '/services' },
-  { name: 'Products Overview', href: '/products' },
-  { name: 'Mobile Apps Overview', href: '/apps' },
-  { name: 'Portfolio', href: '/portfolio' },
-  { name: 'Technical Case Studies', href: '/case-studies' },
-  { name: 'Technologies', href: '/technologies' },
-  { name: 'Industries', href: '/industries' },
+  { name: 'Apps Directory', href: '/apps' },
   { name: 'Blog Index', href: '/blog' },
-  { name: 'Careers', href: '/careers' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'About NI18', href: '/about' },
+  { name: 'Contact Us', href: '/contact' },
+  { name: 'FAQ', href: '/faq' },
   { name: 'Privacy Policy', href: '/privacy-policy' },
   { name: 'Terms of Service', href: '/terms' },
   { name: 'Disclaimer', href: '/disclaimer' },
   { name: 'Cookie Policy', href: '/cookie-policy' },
-  { name: 'FAQ', href: '/faq' },
-  { name: 'Resources', href: '/resources' },
   { name: 'Search', href: '/search' }
 ];
 ---
 
 <BaseLayout 
-  title="HTML Sitemap | NI18 Website Structure"
-  description="Complete HTML Sitemap listing all pages, services, native apps, case studies, and blog articles on www.ni18.in."
+  title="HTML Sitemap | NI18 Mobile Apps Portfolio"
+  description="Complete HTML sitemap of all mobile applications and technical blog posts published by NI18."
 >
   <section class="section page-header">
     <div class="container">
       <Breadcrumb items={[{ name: 'Sitemap' }]} />
       <h1 class="display-large">HTML Sitemap</h1>
-      <p class="body-large sub-desc">Complete index of all public URLs on www.ni18.in.</p>
+      <p class="body-large sub-desc">Index of all pages, mobile apps, and guides on www.ni18.in.</p>
     </div>
   </section>
 
@@ -57,18 +45,8 @@ const staticPages = [
       </div>
 
       <div class="sitemap-col">
-        <h3 class="headline-medium col-title">Services</h3>
+        <h3 class="headline-medium col-title">Android Applications</h3>
         <ul class="sitemap-list">
-          {services.map((s) => (
-            <li><a href={`/services/${s.slug}`} class="sitemap-link">{s.data.title}</a></li>
-          ))}
-        </ul>
-
-        <h3 class="headline-medium col-title" style="margin-top: 2rem;">Products &amp; Apps</h3>
-        <ul class="sitemap-list">
-          {products.map((p) => (
-            <li><a href={`/products/${p.slug}`} class="sitemap-link">{p.data.title}</a></li>
-          ))}
           {apps.map((a) => (
             <li><a href={`/apps/${a.slug}`} class="sitemap-link">{a.data.title}</a></li>
           ))}
@@ -76,17 +54,7 @@ const staticPages = [
       </div>
 
       <div class="sitemap-col">
-        <h3 class="headline-medium col-title">Case Studies &amp; Careers</h3>
-        <ul class="sitemap-list">
-          {caseStudies.map((cs) => (
-            <li><a href={`/case-studies/${cs.slug}`} class="sitemap-link">{cs.data.title}</a></li>
-          ))}
-          {careers.map((c) => (
-            <li><a href={`/careers/${c.slug}`} class="sitemap-link">{c.data.title}</a></li>
-          ))}
-        </ul>
-
-        <h3 class="headline-medium col-title" style="margin-top: 2rem;">Blog Posts</h3>
+        <h3 class="headline-medium col-title">Blog Articles &amp; Guides</h3>
         <ul class="sitemap-list">
           {blogPosts.map((b) => (
             <li><a href={`/blog/${b.slug}`} class="sitemap-link">{b.data.title}</a></li>

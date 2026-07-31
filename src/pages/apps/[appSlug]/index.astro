@@ -1,0 +1,196 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/common/Breadcrumb.astro';
+import MdButton from '../../../components/md3/MdButton.astro';
+import MdBadge from '../../../components/md3/MdBadge.astro';
+import MdIcon from '../../../components/md3/MdIcon.astro';
+import BlogCard from '../../../components/blog/BlogCard.astro';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps');
+  return apps.map((app) => ({
+    params: { appSlug: app.slug },
+    props: { app }
+  }));
+}
+
+const { app } = Astro.props;
+const { Content } = await app.render();
+
+// Fetch all blogs associated with this specific app
+const appBlogs = await getCollection('blog', ({ data }) => !data.draft && data.appId === app.slug);
+appBlogs.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout 
+  title={`${app.data.title} - Official Android App | NI18`}
+  description={app.data.description}
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[
+        { name: 'Apps', href: '/apps' },
+        { name: app.data.title }
+      ]} />
+
+      <div class="app-hero-flex">
+        <div class="app-hero-icon">
+          <MdIcon name={app.data.icon} size="48px" />
+        </div>
+
+        <div class="app-hero-text">
+          <div class="badge-row">
+            <MdBadge>{app.data.category}</MdBadge>
+            <span class="version-tag">Version {app.data.version}</span>
+          </div>
+
+          <h1 class="display-large app-title">{app.data.title}</h1>
+          <p class="body-large tagline">{app.data.tagline}</p>
+
+          <div class="app-meta-pills">
+            <span class="pill rating"><MdIcon name="star" size="18px" /> {app.data.rating} Rating</span>
+            <span class="pill downloads"><MdIcon name="download" size="18px" /> {app.data.downloads} Downloads</span>
+            <span class="pill platform"><MdIcon name="android" size="18px" /> Android Native</span>
+          </div>
+
+          <div class="cta-actions">
+            <MdButton href={app.data.storeLink} variant="filled" target="_blank" rel="noopener noreferrer">
+              <MdIcon name="shop" size="20px" />
+              <span>Get on Google Play</span>
+            </MdButton>
+            {appBlogs.length > 0 && (
+              <MdButton href={`/apps/${app.slug}/blog`} variant="outlined">
+                <MdIcon name="article" size="20px" />
+                <span>View App Blogs ({appBlogs.length})</span>
+              </MdButton>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Content Section -->
+  <section class="section">
+    <div class="container app-content-grid">
+      <div class="main-prose">
+        <div class="prose-content">
+          <Content />
+        </div>
+
+        {app.data.features.length > 0 && (
+          <div class="features-box">
+            <h3 class="headline-medium mb-3">App Features &amp; Highlights</h3>
+            <ul class="features-list">
+              {app.data.features.map((feat) => (
+                <li>
+                  <MdIcon name="check_circle" size="20px" class="check" />
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <aside class="sidebar-box">
+        <div class="sidebar-card">
+          <h4 class="title-medium">Download Information</h4>
+          <ul class="info-list">
+            <li><strong>Developer:</strong> NI18</li>
+            <li><strong>Category:</strong> {app.data.category}</li>
+            <li><strong>Version:</strong> {app.data.version}</li>
+            <li><strong>Rating:</strong> {app.data.rating}</li>
+            <li><strong>Downloads:</strong> {app.data.downloads}</li>
+          </ul>
+          <MdButton href={app.data.storeLink} variant="filled" target="_blank" rel="noopener noreferrer" class="w-full mt-3">
+            Download APK / Play Store
+          </MdButton>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- App-Specific Blogs Section -->
+  {appBlogs.length > 0 && (
+    <section class="section app-blogs-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="label-large category-tag">EXAM GUIDES &amp; TUTORIALS</span>
+          <h2 class="headline-large">Articles for {app.data.title}</h2>
+        </div>
+
+        <div class="grid-3">
+          {appBlogs.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); padding-bottom: 3.5rem; }
+  .app-hero-flex { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
+  @media (min-width: 768px) { .app-hero-flex { flex-direction: row; align-items: flex-start; } }
+  .app-hero-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: var(--md-sys-elevation-2);
+  }
+  .badge-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+  .version-tag { font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); font-weight: 600; }
+  .app-title { margin-bottom: 0.5rem; color: var(--md-sys-color-on-surface); }
+  .tagline { margin-bottom: 1.25rem; color: var(--md-sys-color-on-surface-variant); }
+  .app-meta-pills { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--md-sys-shape-corner-full);
+    background-color: var(--md-sys-color-surface-container-high);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .pill.rating { color: #f59e0b; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+  .app-content-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+  @media (min-width: 1024px) { .app-content-grid { grid-template-columns: 1fr 340px; } }
+  
+  .features-box {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: var(--md-sys-color-surface-container-low);
+    border-radius: var(--md-sys-shape-corner-large);
+    border: 1px solid var(--md-sys-color-outline-variant);
+  }
+  .mb-3 { margin-bottom: 1.25rem; }
+  .features-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .features-list li { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.95rem; }
+  .check { color: var(--md-sys-color-secondary); flex-shrink: 0; }
+
+  .sidebar-card {
+    padding: 1.5rem;
+    background-color: var(--md-sys-color-surface-container-lowest);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+  .info-list { list-style: none; padding: 0; margin: 1rem 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; }
+  .w-full { width: 100%; }
+  .mt-3 { margin-top: 1rem; }
+
+  .app-blogs-section { background-color: var(--md-sys-color-surface-container-low); }
+  .section-header { text-align: center; max-width: 680px; margin: 0 auto 3rem auto; }
+  .category-tag { color: var(--md-sys-color-primary); font-weight: 700; }
+</style>

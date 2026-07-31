@@ -11,19 +11,19 @@ import MdIcon from '../components/md3/MdIcon.astro';
   <section class="section error-section">
     <div class="container error-container">
       <div class="error-code">404</div>
-      <h1 class="headline-large error-title">Page Not Found or Migrated</h1>
+      <h1 class="headline-large error-title">Page Relocated or Not Found</h1>
       <p class="body-large error-desc">
-        We recently upgraded the NI18 website to a faster static platform. If you followed a link to a legacy URL, we are redirecting you...
+        We recently updated the NI18 website to focus on our Android Mobile Apps portfolio and exam revision guides.
       </p>
 
       <div class="error-actions">
-        <MdButton href="/" variant="filled">
+        <MdButton href="/apps" variant="filled">
+          <MdIcon name="smartphone" size="18px" />
+          <span>Explore Android Apps</span>
+        </MdButton>
+        <MdButton href="/" variant="outlined">
           <MdIcon name="home" size="18px" />
           <span>Return Home</span>
-        </MdButton>
-        <MdButton href="/search" variant="outlined">
-          <MdIcon name="search" size="18px" />
-          <span>Search Website</span>
         </MdButton>
       </div>
     </div>
@@ -39,13 +39,17 @@ import MdIcon from '../components/md3/MdIcon.astro';
       '/view/ni18/home/': '/',
       '/view/ni18/about': '/about',
       '/view/ni18/about/': '/about',
-      '/view/ni18/services': '/services',
-      '/view/ni18/services/': '/services',
+      '/view/ni18/services': '/apps',
+      '/view/ni18/services/': '/apps',
       '/view/ni18/contact': '/contact',
       '/view/ni18/contact/': '/contact',
-      '/view/ni18': '/',
-      '/home': '/',
-      '/home/': '/'
+      '/services': '/apps',
+      '/services/': '/apps',
+      '/products': '/apps',
+      '/products/': '/apps',
+      '/case-studies': '/apps',
+      '/case-studies/': '/apps',
+      '/view/ni18': '/'
     };
 
     if (mappings[path]) {

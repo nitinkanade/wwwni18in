@@ -6,17 +6,11 @@ const pathname = new URL(Astro.request.url).pathname;
 
 const navItems = [
   { name: 'Home', href: '/', icon: 'home' },
-  { name: 'About', href: '/about', icon: 'info' },
-  { name: 'Services', href: '/services', icon: 'auto_awesome' },
-  { name: 'Products', href: '/products', icon: 'widgets' },
-  { name: 'Apps', href: '/apps', icon: 'smartphone' },
-  { name: 'Portfolio', href: '/portfolio', icon: 'work' },
-  { name: 'Case Studies', href: '/case-studies', icon: 'assessment' },
-  { name: 'Technologies', href: '/technologies', icon: 'code' },
-  { name: 'Industries', href: '/industries', icon: 'domain' },
-  { name: 'Blog', href: '/blog', icon: 'article' },
-  { name: 'Careers', href: '/careers', icon: 'groups' },
-  { name: 'Contact', href: '/contact', icon: 'mail' },
+  { name: 'Apps Showcase', href: '/apps', icon: 'smartphone' },
+  { name: 'Blog & Tutorials', href: '/blog', icon: 'article' },
+  { name: 'About NI18', href: '/about', icon: 'info' },
+  { name: 'FAQ', href: '/faq', icon: 'quiz' },
+  { name: 'Contact Us', href: '/contact', icon: 'mail' },
   { name: 'Search', href: '/search', icon: 'search' }
 ];
 ---
@@ -59,7 +53,9 @@ const navItems = [
   </nav>
 
   <div class="drawer-footer">
-    <MdButton href="/contact" variant="filled" class="w-full">Get in Touch</MdButton>
+    <MdButton href="https://play.google.com/store/apps/dev?id=9029737187135646839" variant="filled" target="_blank" rel="noopener noreferrer" class="w-full">
+      Google Play Console
+    </MdButton>
   </div>
 </aside>
 

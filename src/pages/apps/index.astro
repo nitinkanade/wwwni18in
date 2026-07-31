@@ -1,25 +1,87 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
-import AppsGrid from '../../components/sections/AppsGrid.astro';
+import MdCard from '../../components/md3/MdCard.astro';
+import MdBadge from '../../components/md3/MdBadge.astro';
+import MdIcon from '../../components/md3/MdIcon.astro';
+
+const apps = await getCollection('apps');
+apps.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout 
-  title="Android Mobile Applications | NI18"
-  description="Download and explore native Android mobile applications engineered by NI18."
+  title="Android Mobile Apps Directory | NI18"
+  description="Official Google Play Android applications catalog published by NI18. Download apps for JEE Maths, MPSC Exams, and English Grammar."
 >
   <section class="section page-header">
     <div class="container">
-      <Breadcrumb items={[{ name: 'Apps' }]} />
-      <h1 class="display-large">Mobile Applications</h1>
-      <p class="body-large sub-desc">Native Android applications crafted for offline reliability and smooth performance.</p>
+      <Breadcrumb items={[{ name: 'Apps Directory' }]} />
+      <h1 class="display-large">NI18 Android Mobile Apps</h1>
+      <p class="body-large sub-desc">Explore our full suite of native Android applications available on Google Play.</p>
     </div>
   </section>
 
-  <AppsGrid />
+  <section class="section">
+    <div class="container grid-2">
+      {apps.map((app) => (
+        <MdCard href={`/apps/${app.slug}`} variant="interactive" class="app-card">
+          <div class="app-card-top">
+            <div class="app-icon">
+              <MdIcon name={app.data.icon} size="36px" />
+            </div>
+            <div class="app-meta">
+              <MdBadge>{app.data.category}</MdBadge>
+              <h2 class="title-large app-title">{app.data.title}</h2>
+              <p class="body-medium">{app.data.tagline}</p>
+            </div>
+          </div>
+
+          <p class="body-small app-desc">{app.data.description}</p>
+
+          <div class="app-footer-row">
+            <div class="stat-group">
+              <span class="rating"><MdIcon name="star" size="16px" /> {app.data.rating}</span>
+              <span class="downloads"><MdIcon name="download" size="16px" /> {app.data.downloads}</span>
+            </div>
+            <div class="view-link">
+              <span>App Details &amp; Blogs</span>
+              <MdIcon name="chevron_right" size="18px" />
+            </div>
+          </div>
+        </MdCard>
+      ))}
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
   .page-header { background-color: var(--md-sys-color-surface-container-low); }
   .sub-desc { margin-top: 0.75rem; }
+  .app-card-top { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1rem; }
+  .app-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--md-sys-shape-corner-large);
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .app-title { margin-top: 0.25rem; margin-bottom: 0.35rem; }
+  .app-desc { margin-bottom: 1.5rem; color: var(--md-sys-color-on-surface-variant); }
+  .app-footer-row {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+  .stat-group { display: flex; gap: 1rem; font-size: 0.85rem; font-weight: 600; }
+  .rating { display: flex; align-items: center; gap: 0.25rem; color: #f59e0b; }
+  .downloads { display: flex; align-items: center; gap: 0.25rem; color: var(--md-sys-color-on-surface-variant); }
+  .view-link { display: flex; align-items: center; gap: 0.25rem; color: var(--md-sys-color-primary); font-weight: 700; font-size: 0.9rem; }
 </style>

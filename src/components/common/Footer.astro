@@ -8,30 +8,29 @@ const navSections = [
     title: 'Company',
     links: [
       { name: 'About NI18', href: '/about' },
-      { name: 'Portfolio', href: '/portfolio' },
-      { name: 'Case Studies', href: '/case-studies' },
-      { name: 'Careers', href: '/careers' },
+      { name: 'Apps Portfolio', href: '/apps' },
+      { name: 'Google Play Profile', href: 'https://play.google.com/store/apps/dev?id=9029737187135646839' },
+      { name: 'FAQ', href: '/faq' },
       { name: 'Contact Us', href: '/contact' }
     ]
   },
   {
-    title: 'Services',
+    title: 'Android Apps',
     links: [
-      { name: 'Android Development', href: '/services/android-app-development' },
-      { name: 'Web Applications', href: '/services/web-application-development' },
-      { name: 'SFCC Consulting', href: '/services/salesforce-commerce-cloud' },
-      { name: 'Digital Utilities', href: '/services/digital-utility-tools' },
-      { name: 'Technical SEO', href: '/services/seo-digital-marketing' }
+      { name: 'JEE Maths Formulas', href: '/apps/jee-maths-formulas' },
+      { name: 'MPSC Quiz Prep in Marathi', href: '/apps/mpsc-quiz-prep' },
+      { name: 'English Grammar Book & Tests', href: '/apps/english-grammar-book-tests' },
+      { name: 'English Grammar in Hindi', href: '/apps/english-grammar-in-hindi' },
+      { name: 'English Grammar in Marathi', href: '/apps/english-grammar-in-marathi' }
     ]
   },
   {
-    title: 'Products & Apps',
+    title: 'Technical Blog',
     links: [
-      { name: 'Digital Utility Suite', href: '/products/digital-utility-suite' },
-      { name: 'SFCC Quiz Master', href: '/products/sfcc-quiz-master' },
-      { name: 'JEE Maths Formulas', href: '/apps/jee-maths-formulas-app' },
-      { name: 'MPSC Quiz Companion', href: '/apps/mpsc-quiz-master-app' },
-      { name: 'Resources Hub', href: '/resources' }
+      { name: 'All Articles', href: '/blog' },
+      { name: 'JEE Maths Guides', href: '/apps/jee-maths-formulas/blog' },
+      { name: 'MPSC Exam Tips', href: '/apps/mpsc-quiz-prep/blog' },
+      { name: 'English Grammar Guides', href: '/apps/english-grammar-book-tests/blog' }
     ]
   },
   {
@@ -41,7 +40,6 @@ const navSections = [
       { name: 'Terms of Service', href: '/terms' },
       { name: 'Disclaimer', href: '/disclaimer' },
       { name: 'Cookie Policy', href: '/cookie-policy' },
-      { name: 'FAQ', href: '/faq' },
       { name: 'HTML Sitemap', href: '/sitemap' }
     ]
   }
@@ -55,16 +53,16 @@ const navSections = [
         <img src="/images/logo.svg" alt="NI18 Logo" width="140" height="35" loading="lazy" />
       </a>
       <p class="body-medium brand-desc">
-        Engineering high-performance native Android applications, modern Astro web experiences, SFCC solutions, and privacy-first browser utilities.
+        Engineering high-performance native Android applications for competitive exams, language learning, and education. Official Google Play Console Developer Profile ID 9029737187135646839.
       </p>
       <div class="contact-info">
         <a href="mailto:contact@ni18.in" class="contact-item">
           <MdIcon name="mail" size="18px" />
           <span>contact@ni18.in</span>
         </a>
-        <a href="https://www.ni18.in" class="contact-item">
-          <MdIcon name="language" size="18px" />
-          <span>www.ni18.in</span>
+        <a href="https://play.google.com/store/apps/dev?id=9029737187135646839" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <MdIcon name="shop" size="18px" />
+          <span>Google Play Developer Profile</span>
         </a>
       </div>
     </div>
@@ -76,7 +74,7 @@ const navSections = [
           <ul class="col-links">
             {section.links.map((link) => (
               <li>
-                <a href={link.href} class="footer-link">{link.name}</a>
+                <a href={link.href} class="footer-link" target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{link.name}</a>
               </li>
             ))}
           </ul>
@@ -88,7 +86,7 @@ const navSections = [
   <div class="footer-bottom">
     <div class="container bottom-flex">
       <p class="body-small text-muted">
-        © {currentYear} NI18 Technologies. All rights reserved. Registered custom domain www.ni18.in.
+        © {currentYear} NI18 Technologies. Registered custom domain www.ni18.in.
       </p>
       <div class="bottom-links">
         <a href="/rss.xml" class="body-small footer-link">RSS Feed</a>

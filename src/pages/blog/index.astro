@@ -9,30 +9,31 @@ import Pagination from '../../components/common/Pagination.astro';
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
+const apps = await getCollection('apps');
+
 const PAGE_SIZE = 6;
 const paginatedPosts = posts.slice(0, PAGE_SIZE);
 const totalPages = Math.ceil(posts.length / PAGE_SIZE);
 
 const categories = [...new Set(posts.map((p) => p.data.category))];
-const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
 ---
 
 <BaseLayout 
-  title="Technical Blog & Engineering Insights | NI18"
-  description="Read programming tutorials, Android Jetpack Compose guides, SFCC developer best practices, and Web Speed optimizations from NI18."
+  title="App Articles, Tutorials & Guides | NI18"
+  description="Read technical guides, exam revision sheets, and learning tutorials for NI18 Android applications."
 >
   <section class="section page-header">
     <div class="container">
       <Breadcrumb items={[{ name: 'Blog' }]} />
-      <h1 class="display-large">Engineering Blog &amp; Insights</h1>
-      <p class="body-large sub-desc">In-depth technical guides, Android tutorials, SFCC best practices, and Web performance articles.</p>
+      <h1 class="display-large">Articles &amp; App Guides</h1>
+      <p class="body-large sub-desc">Exam strategies, formula sheets, and grammar rules for NI18 mobile applications.</p>
 
       <div class="filter-bar">
-        <span class="label-large">Categories:</span>
+        <span class="label-large">Filter by App:</span>
         <div class="chips-group">
-          {categories.map((cat) => (
-            <MdChip href={`/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}>
-              {cat}
+          {apps.map((app) => (
+            <MdChip href={`/apps/${app.slug}/blog`}>
+              {app.data.title}
             </MdChip>
           ))}
         </div>
@@ -58,9 +59,9 @@ const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
   .sub-desc { margin-top: 0.75rem; margin-bottom: 1.5rem; }
   .filter-bar {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
     padding-top: 1rem;
     border-top: 1px solid var(--md-sys-color-outline-variant);
   }

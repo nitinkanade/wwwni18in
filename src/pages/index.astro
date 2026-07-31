@@ -1,65 +1,232 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroSection from '../components/sections/HeroSection.astro';
-import ServicesGrid from '../components/sections/ServicesGrid.astro';
-import ProductsGrid from '../components/sections/ProductsGrid.astro';
-import AppsGrid from '../components/sections/AppsGrid.astro';
-import TechnologiesGrid from '../components/sections/TechnologiesGrid.astro';
-import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
-import StatsSection from '../components/sections/StatsSection.astro';
-import RecentBlogs from '../components/sections/RecentBlogs.astro';
-import FAQSection from '../components/sections/FAQSection.astro';
+import MdCard from '../components/md3/MdCard.astro';
 import MdButton from '../components/md3/MdButton.astro';
+import MdBadge from '../components/md3/MdBadge.astro';
 import MdIcon from '../components/md3/MdIcon.astro';
+import BlogCard from '../components/blog/BlogCard.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+
+const apps = await getCollection('apps');
+apps.sort((a, b) => a.data.order - b.data.order);
+
+const recentPosts = await getCollection('blog', ({ data }) => !data.draft);
+recentPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const featuredPosts = recentPosts.slice(0, 3);
 ---
 
 <BaseLayout 
-  title="NI18 Technologies | High-Performance Android Apps & Modern Web Architecture"
-  description="NI18 is an independent software studio building native Android applications, lightning-fast Astro static web applications, Salesforce Commerce Cloud solutions, and client-side browser utilities."
+  title="NI18 Mobile Apps | Native Android Educational & Exam Prep Software"
+  description="NI18 is an independent Android software publisher creating native applications for JEE Maths, MPSC Exams, and English Grammar. Explore our Google Play Store apps."
 >
-  <HeroSection />
-  <ServicesGrid />
-  <ProductsGrid />
-  <AppsGrid />
-  <TechnologiesGrid />
-  <WhyChooseUs />
-  <StatsSection />
-  <RecentBlogs />
-  <FAQSection />
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-text">
+        <MdBadge class="hero-badge">
+          <MdIcon name="shop" size="14px" />
+          Official Google Play Developer Console
+        </MdBadge>
 
-  <!-- Final CTA Section -->
-  <section class="section cta-section">
-    <div class="container cta-container">
-      <h2 class="display-large cta-title">Ready to Upgrade Your Digital Infrastructure?</h2>
-      <p class="body-large cta-desc">
-        Partner with NI18 to engineer fast native Android applications, 100/100 Lighthouse web applications, and enterprise e-commerce solutions.
-      </p>
-      <MdButton href="/contact" variant="filled" class="cta-btn">
-        <span>Get Started Today</span>
-        <MdIcon name="arrow_forward" size="20px" />
-      </MdButton>
+        <h1 class="display-large hero-title">
+          Native <span class="gradient-text">Android Applications</span> Built for Performance &amp; Scale
+        </h1>
+
+        <p class="body-large hero-desc">
+          NI18 develops offline-first Android apps for competitive exam preparation, mathematics formulas, and English grammar mastery. Over 200,000+ total downloads worldwide.
+        </p>
+
+        <div class="hero-actions">
+          <MdButton href="/apps" variant="filled">
+            <span>Explore All Apps</span>
+            <MdIcon name="arrow_forward" size="18px" />
+          </MdButton>
+          <MdButton href="https://play.google.com/store/apps/dev?id=9029737187135646839" variant="outlined" target="_blank" rel="noopener noreferrer">
+            <span>Google Play Store</span>
+            <MdIcon name="open_in_new" size="18px" />
+          </MdButton>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-pill">
+            <span class="stat-value">5+</span>
+            <span class="stat-label">Published Apps</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-pill">
+            <span class="stat-value">200,000+</span>
+            <span class="stat-label">Total Downloads</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-pill">
+            <span class="stat-value">4.8 / 5</span>
+            <span class="stat-label">Average Rating</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <img 
+          src="/images/hero-illustration.svg" 
+          alt="NI18 Android Mobile Apps Showcase" 
+          width="600" 
+          height="400"
+          loading="eager"
+          class="hero-img"
+        />
+      </div>
     </div>
   </section>
+
+  <!-- Apps Grid Section -->
+  <section class="section apps-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="label-large category-tag">OUR APPS PORTFOLIO</span>
+        <h2 class="headline-large">Featured Android Applications</h2>
+        <p class="body-large section-sub">
+          Lightweight, offline-first mobile software designed with Kotlin and Material Design 3.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        {apps.map((app) => (
+          <MdCard href={`/apps/${app.slug}`} variant="interactive" class="app-card">
+            <div class="app-card-top">
+              <div class="app-icon">
+                <MdIcon name={app.data.icon} size="36px" />
+              </div>
+              <div class="app-meta">
+                <MdBadge>{app.data.category}</MdBadge>
+                <h3 class="title-large app-title">{app.data.title}</h3>
+                <p class="body-medium">{app.data.tagline}</p>
+              </div>
+            </div>
+
+            <div class="app-features-preview">
+              {app.data.features.slice(0, 2).map((feat) => (
+                <div class="feat-item">
+                  <MdIcon name="check_circle" size="16px" class="check-icon" />
+                  <span>{feat}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="app-stats-row">
+              <div class="app-stat">
+                <MdIcon name="star" size="16px" class="star" />
+                <span>{app.data.rating}</span>
+              </div>
+              <div class="app-stat">
+                <MdIcon name="download" size="16px" />
+                <span>{app.data.downloads}</span>
+              </div>
+              <div class="app-arrow">
+                <span>View App &amp; Guides</span>
+                <MdIcon name="arrow_forward" size="16px" />
+              </div>
+            </div>
+          </MdCard>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent App Blogs -->
+  <section class="section recent-blogs">
+    <div class="container">
+      <div class="section-header">
+        <span class="label-large category-tag">APP GUIDES &amp; TUTORIALS</span>
+        <h2 class="headline-large">Latest App Articles &amp; Exam Guides</h2>
+      </div>
+
+      <div class="grid-3">
+        {featuredPosts.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FAQSection />
 </BaseLayout>
 
 <style>
-  .cta-section {
+  .hero-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  @media (min-width: 1024px) {
+    .hero-section { padding-top: 6rem; padding-bottom: 6rem; }
+  }
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .hero-container { grid-template-columns: 1fr 1fr; }
+  }
+  .gradient-text {
     background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
-    color: #ffffff;
-    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
+  .hero-desc { margin-bottom: 2rem; max-width: 540px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+  .stat-pill { display: flex; flex-direction: column; }
+  .stat-value { font-size: 1.25rem; font-weight: 800; color: var(--md-sys-color-primary); }
+  .stat-label { font-size: 0.75rem; color: var(--md-sys-color-on-surface-variant); }
+  .stat-divider { width: 1px; height: 30px; background-color: var(--md-sys-color-outline-variant); }
+  .hero-img { width: 100%; border-radius: var(--md-sys-shape-corner-extra-large); }
 
-  .cta-container {
-    max-width: 800px;
+  .apps-section { background-color: var(--md-sys-color-surface-container-low); }
+  .section-header { text-align: center; max-width: 680px; margin: 0 auto 3rem auto; }
+  .category-tag { color: var(--md-sys-color-primary); font-weight: 700; }
+  
+  .app-card-top { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1rem; }
+  .app-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--md-sys-shape-corner-large);
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
+  .app-title { margin-top: 0.25rem; margin-bottom: 0.35rem; }
+  
+  .app-features-preview {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .feat-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); }
+  .check-icon { color: var(--md-sys-color-secondary); }
 
-  .cta-title {
-    color: #ffffff;
-    margin-bottom: 1rem;
+  .app-stats-row {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
   }
-
-  .cta-desc {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2rem;
-  }
+  .app-stat { display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; font-weight: 600; }
+  .star { color: #f59e0b; }
+  .app-arrow { margin-left: auto; display: flex; align-items: center; gap: 0.25rem; color: var(--md-sys-color-primary); font-weight: 700; font-size: 0.85rem; }
 </style>
