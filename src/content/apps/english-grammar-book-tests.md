@@ -1,9 +1,9 @@
 ---
-title: "English Grammar Book & Tests"
+title: "All English Grammar Book"
 tagline: "Complete English grammar rules, lessons, practice tests, and interactive quizzes."
-description: "Master English grammar with structured lessons, parts of speech breakdowns, tense rules, active/passive voice, and comprehensive practice tests."
-playStoreId: "com.ni18.englishgrammar"
-storeLink: "https://play.google.com/store/apps/dev?id=9029737187135646839"
+description: "Master English grammar offline with step-by-step chapters covering Nouns, Tenses, Active/Passive Voice, Prepositions, and 1,000+ quiz questions."
+playStoreId: "in.ni18.englishgrammar"
+storeLink: "https://play.google.com/store/apps/details?id=in.ni18.englishgrammar"
 icon: "menu_book"
 category: "Language Learning"
 rating: "4.8 / 5"
@@ -11,12 +11,12 @@ downloads: "100,000+"
 features:
   - "Complete lessons covering Nouns, Verbs, Tenses, Prepositions & Articles"
   - "1,000+ interactive practice questions with instant scoring"
-  - "Clear grammatical explanations and real-world example sentences"
-  - "Offline reader mode & progress tracking"
-version: "4.0.1"
-order: 3
+  - "Active & Passive voice, Direct/Indirect speech rules"
+  - "Lightweight, fast, and 100% offline"
+version: "2.5.0"
+order: 7
 ---
 
 ## Overview
 
-**English Grammar Book & Tests** is a top-rated Android learning companion designed to help students, job seekers, and competitive exam takers master English grammar principles effortlessly.
+**All English Grammar Book** is a comprehensive language learning application designed for students and professionals seeking to improve spoken and written English fluency.

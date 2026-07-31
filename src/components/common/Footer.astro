@@ -9,37 +9,41 @@ const navSections = [
     title: 'Company',
     links: [
       { name: 'About NI18', href: getUrl('/about') },
-      { name: 'Apps Portfolio', href: getUrl('/apps') },
+      { name: 'All 14 Android Apps', href: getUrl('/apps') },
       { name: 'Google Play Profile', href: 'https://play.google.com/store/apps/dev?id=9029737187135646839' },
       { name: 'FAQ', href: getUrl('/faq') },
       { name: 'Contact Us', href: getUrl('/contact') }
     ]
   },
   {
-    title: 'Android Apps',
+    title: 'Exam & Study Apps',
     links: [
-      { name: 'JEE Maths Formulas', href: getUrl('/apps/jee-maths-formulas') },
-      { name: 'MPSC Quiz Prep in Marathi', href: getUrl('/apps/mpsc-quiz-prep') },
-      { name: 'English Grammar Book & Tests', href: getUrl('/apps/english-grammar-book-tests') },
-      { name: 'English Grammar in Hindi', href: getUrl('/apps/english-grammar-in-hindi') },
-      { name: 'English Grammar in Marathi', href: getUrl('/apps/english-grammar-in-marathi') }
+      { name: 'JEE Math Formula', href: getUrl('/apps/jee-maths-formulas') },
+      { name: 'JEE Mock Test PYQ', href: getUrl('/apps/jee-mock-test') },
+      { name: 'MPSC Quiz Prep', href: getUrl('/apps/mpsc-quiz-prep') },
+      { name: 'RRB NTPC PYQ Test', href: getUrl('/apps/rrb-ntpc-mock-test') },
+      { name: 'CDAC CCAT Prep', href: getUrl('/apps/cdac-ccat-prep') },
+      { name: 'Physics Calculator', href: getUrl('/apps/physics-formulas-calculator') }
     ]
   },
   {
-    title: 'Technical Blog',
+    title: 'Language & Utilities',
     links: [
-      { name: 'All Articles', href: getUrl('/blog') },
-      { name: 'JEE Maths Guides', href: getUrl('/apps/jee-maths-formulas/blog') },
-      { name: 'MPSC Exam Tips', href: getUrl('/apps/mpsc-quiz-prep/blog') },
-      { name: 'English Grammar Guides', href: getUrl('/apps/english-grammar-book-tests/blog') }
+      { name: 'English Grammar Book', href: getUrl('/apps/english-grammar-book-tests') },
+      { name: 'Grammar in Hindi', href: getUrl('/apps/english-grammar-in-hindi') },
+      { name: 'Grammar in Marathi', href: getUrl('/apps/english-grammar-in-marathi') },
+      { name: 'AI Prompt Book', href: getUrl('/apps/ai-prompt-book') },
+      { name: 'SFCC Developer Doc', href: getUrl('/apps/sfcc-doc') },
+      { name: 'Bloopball Puzzle Game', href: getUrl('/apps/bloopball-ball-smash-puzzle') }
     ]
   },
   {
-    title: 'Legal & Info',
+    title: 'Legal & Sitemap',
     links: [
       { name: 'Privacy Policy', href: getUrl('/privacy-policy') },
       { name: 'Terms of Service', href: getUrl('/terms') },
-      { name: 'HTML Sitemap', href: getUrl('/sitemap') }
+      { name: 'HTML Sitemap', href: getUrl('/sitemap') },
+      { name: 'Search Catalog', href: getUrl('/search') }
     ]
   }
 ];
@@ -52,7 +56,7 @@ const navSections = [
         <img src={getUrl('/images/logo.svg')} alt="NI18 Logo" width="140" height="35" loading="lazy" />
       </a>
       <p class="body-medium brand-desc">
-        Engineering high-performance native Android applications for competitive exams, language learning, and education. Official Google Play Console Developer Profile ID 9029737187135646839.
+        Engineering high-performance native Android applications for competitive exams, language learning, developer utilities, and games. Official Google Play Developer Profile ID 9029737187135646839.
       </p>
       <div class="contact-info">
         <a href="mailto:contact@ni18.in" class="contact-item">
