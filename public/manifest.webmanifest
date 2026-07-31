@@ -1,14 +1,14 @@
 {
-  "name": "NI18 - Digital Solutions & Software Development",
+  "name": "NI18 - Native Android Applications Portfolio",
   "short_name": "NI18",
-  "description": "High-performance custom Android apps, web applications, SFCC solutions, and browser-based utility tools.",
-  "start_url": "/",
+  "description": "High-performance native Android applications for JEE Maths, MPSC Exams, and English Grammar mastery.",
+  "start_url": "/wwwni18in/",
   "display": "standalone",
   "background_color": "#0f172a",
-  "theme_color": "#6366f1",
+  "theme_color": "#4f46e5",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/wwwni18in/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

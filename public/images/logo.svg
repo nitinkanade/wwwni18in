@@ -1,12 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="100%" height="100%">
-  <defs>
-    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6366f1" />
-      <stop offset="100%" stop-color="#06b6d4" />
-    </linearGradient>
-  </defs>
-  <rect x="8" y="10" width="60" height="60" rx="16" fill="url(#logo-grad)" />
-  <path d="M25 55V25h8l12 19V25h8v30h-8L33 35v20H25z" fill="#ffffff" />
-  <text x="82" y="52" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="34" fill="currentColor" letter-spacing="-0.5">NI18</text>
-  <text x="175" y="52" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="16" fill="#8b5cf6" letter-spacing="1">TECHNOLOGIES</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" width="100%" height="100%">
+  <!-- Icon Mark -->
+  <g transform="translate(10, 10) scale(0.16)">
+    <!-- Black Container -->
+    <rect width="500" height="500" rx="72" fill="#4f46e5" />
+    <g transform="translate(30, 40)">
+      <!-- n -->
+      <path d="M40 380 V220 C40 185 65 160 100 160 C135 160 160 185 160 220 V380 H115 V235 C115 210 102 198 85 198 C68 198 55 210 55 235 V380 Z" fill="#ffffff" />
+      <!-- i -->
+      <circle cx="215" cy="115" r="28" fill="#ffffff" />
+      <rect x="193" y="160" width="44" height="220" rx="8" fill="#ffffff" />
+      <!-- 18 box -->
+      <rect x="260" y="70" width="190" height="260" rx="16" fill="#ffffff" />
+      <path d="M295 140 H325 V290 H295 Z M295 140 L280 160 H295 Z" fill="#4f46e5" />
+      <path d="M375 140 C350 140 335 152 335 172 C335 190 348 202 368 208 C345 215 330 230 330 252 C330 278 350 295 380 295 C410 295 430 278 430 252 C430 230 415 215 392 208 C412 202 425 190 425 172 C425 152 410 140 375 140 Z M375 168 C390 168 398 175 398 185 C398 195 390 202 375 202 C360 202 352 195 352 185 C352 175 360 168 375 168 Z M378 224 C395 224 403 233 403 246 C403 260 395 268 378 268 C361 268 353 260 353 246 C353 233 361 224 378 224 Z" fill="#4f46e5" />
+    </g>
+  </g>
+
+  <!-- Typography -->
+  <text x="105" y="54" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="34" font-weight="900" fill="currentColor" letter-spacing="-0.5px">NI18</text>
+  <text x="105" y="76" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#818cf8" letter-spacing="1.5px">MOBILE APPS</text>
 </svg>
