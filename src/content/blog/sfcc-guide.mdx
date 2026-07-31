@@ -1,0 +1,47 @@
+---
+title: "Salesforce Commerce Cloud (SFCC) Master Guide: Architecting High-Converting Storefronts"
+description: "Best practices for Salesforce Commerce Cloud B2C development, Page Designer integration, ISML optimization, and headless storefront implementations."
+pubDate: 2026-07-20
+author: "Nikhil Sharma"
+category: "E-Commerce"
+tags: ["SFCC", "Salesforce", "E-Commerce", "Web Architecture"]
+featured: true
+---
+
+Salesforce Commerce Cloud (SFCC) powers world-class retail experiences globally. Optimizing B2C storefront performance requires deep knowledge of cartridges, controller pipelines, OCAPI / Shopper APIs, and caching strategies.
+
+## Essential SFCC Development Principles
+
+### 1. Cartridge Pipeline Optimization
+
+Ensure controller execution time remains under 50ms by leveraging custom cache strategies and avoiding heavy SQL queries in rendering loops.
+
+```javascript
+'use strict';
+
+var server = require('server');
+var cache = require('*/cartridge/scripts/middleware/cache');
+
+server.get('Show', cache.applyDefaultCache, function (req, res, next) {
+    var CatalogMgr = require('dw/catalog/CatalogMgr');
+    var category = CatalogMgr.getCategory(req.querystring.cgid);
+    
+    res.render('category/categoryLanding', {
+        category: category
+    });
+    next();
+});
+
+module.exports = server.exports();
+```
+
+> [!TIP]
+> Always enable strict caching headers for static content assets and product detail catalog responses.
+
+### 2. Headless Commerce Migration
+
+NI18 specializes in decoupling SFCC backends from modern frontend frameworks like Astro, Next.js, and PWA Kit using Salesforce Commerce APIs (SCAPI).
+
+- **Reduced Page Load Time**: Cut storefront load times by up to 70%.
+- **Improved Lighthouse Scores**: Reach 95+ performance scores consistently.
+- **Rapid Feature Iteration**: Deploy UI components without full cartridge redeployments.

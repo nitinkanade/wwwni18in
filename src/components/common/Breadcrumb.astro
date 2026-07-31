@@ -1,0 +1,92 @@
+---
+import MdIcon from '../md3/MdIcon.astro';
+
+interface BreadcrumbItem {
+  name: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': items.map((item, index) => ({
+    '@type': 'ListItem',
+    'position': index + 1,
+    'name': item.name,
+    'item': item.href ? new URL(item.href, Astro.site).href : undefined
+  }))
+};
+---
+
+<nav aria-label="Breadcrumb" class="breadcrumb-container">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="/" class="breadcrumb-link">
+        <MdIcon name="home" size="16px" />
+        <span>Home</span>
+      </a>
+    </li>
+    {items.map((item, index) => (
+      <li class="breadcrumb-item">
+        <MdIcon name="chevron_right" size="16px" class="separator" />
+        {item.href && index < items.length - 1 ? (
+          <a href={item.href} class="breadcrumb-link">{item.name}</a>
+        ) : (
+          <span class="breadcrumb-current" aria-current="page">{item.name}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<style>
+  .breadcrumb-container {
+    padding: 1rem 0;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  .breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .breadcrumb-link {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .breadcrumb-link:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb-current {
+    color: var(--md-sys-color-on-surface-variant);
+    font-weight: 600;
+  }
+
+  .separator {
+    color: var(--md-sys-color-outline);
+  }
+</style>

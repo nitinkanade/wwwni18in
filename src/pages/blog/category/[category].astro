@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/common/Breadcrumb.astro';
+import BlogCard from '../../../components/blog/BlogCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const categories = [...new Set(posts.map((p) => p.data.category))];
+
+  return categories.map((category) => {
+    const slugified = category.toLowerCase().replace(/\s+/g, '-');
+    const filteredPosts = posts.filter((p) => p.data.category.toLowerCase().replace(/\s+/g, '-') === slugified);
+    return {
+      params: { category: slugified },
+      props: { categoryName: category, posts: filteredPosts }
+    };
+  });
+}
+
+const { categoryName, posts } = Astro.props;
+---
+
+<BaseLayout 
+  title={`${categoryName} Articles | NI18 Blog`}
+  description={`Browse articles and guides in ${categoryName} category on NI18.`}
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[
+        { name: 'Blog', href: '/blog' },
+        { name: `Category: ${categoryName}` }
+      ]} />
+      <h1 class="display-large">Category: {categoryName}</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid-3">
+      {posts.map((post) => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+</style>

@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import MdCard from '../../components/md3/MdCard.astro';
+import MdBadge from '../../components/md3/MdBadge.astro';
+
+const careers = await getCollection('careers');
+---
+
+<BaseLayout 
+  title="Careers & Open Positions | NI18"
+  description="Join the NI18 engineering team. Explore open engineering positions in Android development and Astro web engineering."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Careers' }]} />
+      <h1 class="display-large">Careers at NI18</h1>
+      <p class="body-large sub-desc">Build high-performance Android applications and zero-overhead web software with us.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid-2">
+      {careers.map((career) => (
+        <MdCard href={`/careers/${career.slug}`} variant="interactive">
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <MdBadge>{career.data.department}</MdBadge>
+            <span class="md-chip">{career.data.type}</span>
+          </div>
+          <h3 class="title-large" style="margin-bottom: 0.5rem;">{career.data.title}</h3>
+          <p class="body-medium">Location: {career.data.location} • Experience: {career.data.experience}</p>
+        </MdCard>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+</style>

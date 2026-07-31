@@ -1,0 +1,16 @@
+{
+  "name": "NI18 - Digital Solutions & Software Development",
+  "short_name": "NI18",
+  "description": "High-performance custom Android apps, web applications, SFCC solutions, and browser-based utility tools.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

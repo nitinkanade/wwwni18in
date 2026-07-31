@@ -1,0 +1,92 @@
+---
+import Navigation from './Navigation.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import MobileDrawer from './MobileDrawer.astro';
+import MdButton from '../md3/MdButton.astro';
+import MdIcon from '../md3/MdIcon.astro';
+---
+
+<header class="sticky-header" id="header">
+  <div class="container header-container">
+    <a href="/" class="logo-link" aria-label="NI18 Homepage">
+      <img src="/images/logo.svg" alt="NI18 Technologies Logo" width="140" height="35" loading="eager" />
+    </a>
+
+    <Navigation />
+
+    <div class="header-actions">
+      <a href="/search" class="search-btn" aria-label="Search NI18 Website">
+        <MdIcon name="search" size="20px" />
+      </a>
+      <ThemeToggle />
+      <div class="cta-desktop">
+        <MdButton href="/contact" variant="filled">Contact Us</MdButton>
+      </div>
+      <MobileDrawer />
+    </div>
+  </div>
+</header>
+
+<style>
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    transition: background-color 0.3s ease;
+  }
+
+  :global([data-theme='light']) .sticky-header {
+    background-color: rgba(248, 250, 252, 0.85);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--md-sys-shape-corner-full);
+    border: 1px solid var(--md-sys-color-outline);
+    color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .search-btn:hover {
+    background-color: var(--md-sys-color-surface-container);
+    border-color: var(--md-sys-color-primary);
+  }
+
+  .cta-desktop {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .cta-desktop {
+      display: block;
+    }
+  }
+</style>

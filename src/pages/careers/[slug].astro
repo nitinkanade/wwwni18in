@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import ContactForm from '../../components/sections/ContactForm.astro';
+
+export async function getStaticPaths() {
+  const careers = await getCollection('careers');
+  return careers.map((career) => ({
+    params: { slug: career.slug },
+    props: { career }
+  }));
+}
+
+const { career } = Astro.props;
+const { Content } = await career.render();
+---
+
+<BaseLayout 
+  title={`${career.data.title} | NI18 Careers`}
+  description={`Open position for ${career.data.title} at NI18 (${career.data.location}).`}
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[
+        { name: 'Careers', href: '/careers' },
+        { name: career.data.title }
+      ]} />
+
+      <h1 class="display-large">{career.data.title}</h1>
+      <p class="body-large sub-desc">{career.data.department} • {career.data.location} • {career.data.type}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-grid">
+      <div class="prose-content">
+        <Content />
+      </div>
+      <div>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+  .detail-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+  @media (min-width: 1024px) { .detail-grid { grid-template-columns: 1fr 420px; } }
+</style>

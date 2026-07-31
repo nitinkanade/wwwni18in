@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import ServicesGrid from '../../components/sections/ServicesGrid.astro';
+---
+
+<BaseLayout 
+  title="Engineering & Consulting Services | NI18"
+  description="Explore NI18 software engineering services: Native Android Development, Modern Astro Web Applications, SFCC E-Commerce Consulting, and Technical SEO."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Services' }]} />
+      <h1 class="display-large">Our Engineering Services</h1>
+      <p class="body-large sub-desc">End-to-end software development and technical consulting tailored for high performance.</p>
+    </div>
+  </section>
+
+  <ServicesGrid />
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--md-sys-color-surface-container-low);
+  }
+  .sub-desc {
+    margin-top: 0.75rem;
+  }
+</style>

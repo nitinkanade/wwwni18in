@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import ServicesGrid from '../components/sections/ServicesGrid.astro';
+import ProductsGrid from '../components/sections/ProductsGrid.astro';
+import AppsGrid from '../components/sections/AppsGrid.astro';
+import TechnologiesGrid from '../components/sections/TechnologiesGrid.astro';
+import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
+import StatsSection from '../components/sections/StatsSection.astro';
+import RecentBlogs from '../components/sections/RecentBlogs.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+import MdButton from '../components/md3/MdButton.astro';
+import MdIcon from '../components/md3/MdIcon.astro';
+---
+
+<BaseLayout 
+  title="NI18 Technologies | High-Performance Android Apps & Modern Web Architecture"
+  description="NI18 is an independent software studio building native Android applications, lightning-fast Astro static web applications, Salesforce Commerce Cloud solutions, and client-side browser utilities."
+>
+  <HeroSection />
+  <ServicesGrid />
+  <ProductsGrid />
+  <AppsGrid />
+  <TechnologiesGrid />
+  <WhyChooseUs />
+  <StatsSection />
+  <RecentBlogs />
+  <FAQSection />
+
+  <!-- Final CTA Section -->
+  <section class="section cta-section">
+    <div class="container cta-container">
+      <h2 class="display-large cta-title">Ready to Upgrade Your Digital Infrastructure?</h2>
+      <p class="body-large cta-desc">
+        Partner with NI18 to engineer fast native Android applications, 100/100 Lighthouse web applications, and enterprise e-commerce solutions.
+      </p>
+      <MdButton href="/contact" variant="filled" class="cta-btn">
+        <span>Get Started Today</span>
+        <MdIcon name="arrow_forward" size="20px" />
+      </MdButton>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cta-section {
+    background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .cta-container {
+    max-width: 800px;
+  }
+
+  .cta-title {
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-desc {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+  }
+</style>

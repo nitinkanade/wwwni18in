@@ -1,0 +1,168 @@
+---
+import MdButton from '../md3/MdButton.astro';
+import MdBadge from '../md3/MdBadge.astro';
+import MdIcon from '../md3/MdIcon.astro';
+---
+
+<section class="hero-section">
+  <div class="container hero-container">
+    <div class="hero-text">
+      <MdBadge class="hero-badge">
+        <MdIcon name="bolt" size="14px" />
+        Engineering Software Excellence
+      </MdBadge>
+
+      <h1 class="display-large hero-title">
+        High-Performance <span class="gradient-text">Android Apps</span> &amp; Modern Web Architecture
+      </h1>
+
+      <p class="body-large hero-desc">
+        NI18 is an independent software studio building native Android applications, lightning-fast Astro static web applications, Salesforce Commerce Cloud solutions, and client-side browser utilities.
+      </p>
+
+      <div class="hero-actions">
+        <MdButton href="/contact" variant="filled">
+          <span>Start a Project</span>
+          <MdIcon name="arrow_forward" size="18px" />
+        </MdButton>
+        <MdButton href="/services" variant="outlined">
+          <span>Explore Services</span>
+        </MdButton>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <span class="stat-value">100/100</span>
+          <span class="stat-label">Lighthouse Score</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-pill">
+          <span class="stat-value">75k+</span>
+          <span class="stat-label">App Downloads</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-pill">
+          <span class="stat-value">100%</span>
+          <span class="stat-label">Static &amp; Secure</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <div class="hero-card-wrapper">
+        <img 
+          src="/images/hero-illustration.svg" 
+          alt="NI18 Software Architecture & Core Web Vitals Illustration" 
+          width="600" 
+          height="400"
+          loading="eager"
+          decoding="async"
+          class="hero-img"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-section {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-badge {
+    margin-bottom: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .hero-title {
+    margin-bottom: 1.25rem;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-desc {
+    margin-bottom: 2rem;
+    max-width: 540px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+
+  .stat-pill {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--md-sys-color-primary);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 30px;
+    background-color: var(--md-sys-color-outline-variant);
+  }
+
+  .hero-img {
+    width: 100%;
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    box-shadow: var(--md-sys-elevation-3);
+  }
+</style>

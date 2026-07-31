@@ -1,0 +1,35 @@
+/* Pagefind MD3 Overrides */
+
+:root {
+  --pagefind-ui-primary: var(--md-sys-color-primary);
+  --pagefind-ui-text: var(--md-sys-color-on-surface);
+  --pagefind-ui-background: var(--md-sys-color-surface-container-lowest);
+  --pagefind-ui-border: var(--md-sys-color-outline);
+  --pagefind-ui-tag: var(--md-sys-color-primary-container);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 12px;
+  --pagefind-ui-image-border-radius: 8px;
+  --pagefind-ui-font: inherit;
+}
+
+.pagefind-ui .pagefind-ui__search-input {
+  background-color: var(--md-sys-color-surface-container-lowest) !important;
+  color: var(--md-sys-color-on-surface) !important;
+  border-radius: var(--md-sys-shape-corner-medium) !important;
+  border: 1px solid var(--md-sys-color-outline) !important;
+  padding: 0.85rem 1rem !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link {
+  color: var(--md-sys-color-primary) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link:hover {
+  text-decoration: underline !important;
+}
+
+.pagefind-ui .pagefind-ui__result-excerpt {
+  color: var(--md-sys-color-on-surface-variant) !important;
+}

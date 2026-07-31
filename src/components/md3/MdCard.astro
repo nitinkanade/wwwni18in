@@ -1,0 +1,22 @@
+---
+interface Props {
+  variant?: 'outlined' | 'elevated' | 'interactive';
+  href?: string;
+  class?: string;
+}
+
+const { variant = 'outlined', href, class: className = '' } = Astro.props;
+const cardClass = `md-card md-card--${variant} ${className}`.trim();
+---
+
+{
+  href ? (
+    <a href={href} class={`${cardClass} md-card--interactive`} style="text-decoration: none; color: inherit;">
+      <slot />
+    </a>
+  ) : (
+    <div class={cardClass}>
+      <slot />
+    </div>
+  )
+}

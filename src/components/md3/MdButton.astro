@@ -1,0 +1,33 @@
+---
+interface Props {
+  variant?: 'filled' | 'outlined' | 'text' | 'tonal';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  id?: string;
+  [key: string]: any;
+}
+
+const {
+  variant = 'filled',
+  href,
+  type = 'button',
+  class: className = '',
+  id,
+  ...rest
+} = Astro.props;
+
+const buttonClass = `md-button md-button--${variant} ${className}`.trim();
+---
+
+{
+  href ? (
+    <a href={href} class={buttonClass} id={id} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={buttonClass} id={id} {...rest}>
+      <slot />
+    </button>
+  )
+}

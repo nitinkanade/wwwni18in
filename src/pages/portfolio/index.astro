@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import ProductsGrid from '../../components/sections/ProductsGrid.astro';
+import AppsGrid from '../../components/sections/AppsGrid.astro';
+---
+
+<BaseLayout 
+  title="Portfolio & Featured Work | NI18"
+  description="Explore NI18 project portfolio across Android applications, client-side web utility tools, and Salesforce Commerce Cloud."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Portfolio' }]} />
+      <h1 class="display-large">Our Portfolio</h1>
+      <p class="body-large sub-desc">A showcase of production native Android apps, web applications, and utility platforms engineered by NI18.</p>
+    </div>
+  </section>
+
+  <ProductsGrid />
+  <AppsGrid />
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+</style>

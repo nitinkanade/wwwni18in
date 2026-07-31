@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product }
+  }));
+}
+
+const { product } = Astro.props;
+const { Content } = await product.render();
+---
+
+<BaseLayout 
+  title={`${product.data.title} | NI18 Products`}
+  description={product.data.description}
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[
+        { name: 'Products', href: '/products' },
+        { name: product.data.title }
+      ]} />
+
+      <h1 class="display-large">{product.data.title}</h1>
+      <p class="body-large sub-desc">{product.data.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose-container">
+      <div class="prose-content">
+        <Content />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+  .prose-container { max-width: 820px; }
+</style>

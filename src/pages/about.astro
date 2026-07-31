@@ -1,0 +1,43 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/common/Breadcrumb.astro';
+
+const aboutEntry = await getEntry('pages', 'about');
+if (!aboutEntry) throw new Error('About page content not found');
+const { Content } = await aboutEntry.render();
+---
+
+<BaseLayout 
+  title={aboutEntry.data.title}
+  description={aboutEntry.data.description}
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'About NI18' }]} />
+      <h1 class="display-large">{aboutEntry.data.title}</h1>
+      <p class="body-large sub-desc">{aboutEntry.data.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose-container">
+      <div class="prose-content">
+        <Content />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--md-sys-color-surface-container-low);
+  }
+  .sub-desc {
+    margin-top: 0.75rem;
+    max-width: 720px;
+  }
+  .prose-container {
+    max-width: 820px;
+  }
+</style>

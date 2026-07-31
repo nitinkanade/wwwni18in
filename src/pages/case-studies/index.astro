@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import MdCard from '../../components/md3/MdCard.astro';
+import MdBadge from '../../components/md3/MdBadge.astro';
+
+const caseStudies = await getCollection('case-studies');
+---
+
+<BaseLayout 
+  title="Case Studies & Client Results | NI18"
+  description="In-depth technical case studies on SFCC e-commerce speed optimization, native Android architecture, and client-side web platforms."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Case Studies' }]} />
+      <h1 class="display-large">Technical Case Studies</h1>
+      <p class="body-large sub-desc">Detailed results and architectural breakdowns of software solutions engineered by NI18.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid-2">
+      {caseStudies.map((cs) => (
+        <MdCard href={`/case-studies/${cs.slug}`} variant="interactive">
+          <MdBadge>{cs.data.client}</MdBadge>
+          <h3 class="title-large" style="margin-top: 0.75rem; margin-bottom: 0.5rem;">{cs.data.title}</h3>
+          <p class="body-medium" style="margin-bottom: 1.25rem;">{cs.data.summary}</p>
+          <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            {cs.data.metrics.map((m) => (
+              <li class="md-chip">{m}</li>
+            ))}
+          </ul>
+        </MdCard>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+</style>

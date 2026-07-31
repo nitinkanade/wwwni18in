@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/common/Breadcrumb.astro';
+
+const blogPosts = await getCollection('blog');
+const services = await getCollection('services');
+const products = await getCollection('products');
+const apps = await getCollection('apps');
+const caseStudies = await getCollection('case-studies');
+const careers = await getCollection('careers');
+
+const staticPages = [
+  { name: 'Home', href: '/' },
+  { name: 'About NI18', href: '/about' },
+  { name: 'Services Overview', href: '/services' },
+  { name: 'Products Overview', href: '/products' },
+  { name: 'Mobile Apps Overview', href: '/apps' },
+  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Technical Case Studies', href: '/case-studies' },
+  { name: 'Technologies', href: '/technologies' },
+  { name: 'Industries', href: '/industries' },
+  { name: 'Blog Index', href: '/blog' },
+  { name: 'Careers', href: '/careers' },
+  { name: 'Contact', href: '/contact' },
+  { name: 'Privacy Policy', href: '/privacy-policy' },
+  { name: 'Terms of Service', href: '/terms' },
+  { name: 'Disclaimer', href: '/disclaimer' },
+  { name: 'Cookie Policy', href: '/cookie-policy' },
+  { name: 'FAQ', href: '/faq' },
+  { name: 'Resources', href: '/resources' },
+  { name: 'Search', href: '/search' }
+];
+---
+
+<BaseLayout 
+  title="HTML Sitemap | NI18 Website Structure"
+  description="Complete HTML Sitemap listing all pages, services, native apps, case studies, and blog articles on www.ni18.in."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Sitemap' }]} />
+      <h1 class="display-large">HTML Sitemap</h1>
+      <p class="body-large sub-desc">Complete index of all public URLs on www.ni18.in.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container sitemap-grid">
+      <div class="sitemap-col">
+        <h3 class="headline-medium col-title">Main Pages</h3>
+        <ul class="sitemap-list">
+          {staticPages.map((p) => (
+            <li><a href={p.href} class="sitemap-link">{p.name}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="sitemap-col">
+        <h3 class="headline-medium col-title">Services</h3>
+        <ul class="sitemap-list">
+          {services.map((s) => (
+            <li><a href={`/services/${s.slug}`} class="sitemap-link">{s.data.title}</a></li>
+          ))}
+        </ul>
+
+        <h3 class="headline-medium col-title" style="margin-top: 2rem;">Products &amp; Apps</h3>
+        <ul class="sitemap-list">
+          {products.map((p) => (
+            <li><a href={`/products/${p.slug}`} class="sitemap-link">{p.data.title}</a></li>
+          ))}
+          {apps.map((a) => (
+            <li><a href={`/apps/${a.slug}`} class="sitemap-link">{a.data.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="sitemap-col">
+        <h3 class="headline-medium col-title">Case Studies &amp; Careers</h3>
+        <ul class="sitemap-list">
+          {caseStudies.map((cs) => (
+            <li><a href={`/case-studies/${cs.slug}`} class="sitemap-link">{cs.data.title}</a></li>
+          ))}
+          {careers.map((c) => (
+            <li><a href={`/careers/${c.slug}`} class="sitemap-link">{c.data.title}</a></li>
+          ))}
+        </ul>
+
+        <h3 class="headline-medium col-title" style="margin-top: 2rem;">Blog Posts</h3>
+        <ul class="sitemap-list">
+          {blogPosts.map((b) => (
+            <li><a href={`/blog/${b.slug}`} class="sitemap-link">{b.data.title}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3rem;
+  }
+  @media (min-width: 768px) {
+    .sitemap-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .col-title {
+    color: var(--md-sys-color-primary);
+    margin-bottom: 1rem;
+  }
+  .sitemap-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .sitemap-link {
+    color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .sitemap-link:hover {
+    color: var(--md-sys-color-primary);
+    text-decoration: underline;
+  }
+</style>

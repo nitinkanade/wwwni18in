@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MdButton from '../components/md3/MdButton.astro';
+import MdIcon from '../components/md3/MdIcon.astro';
+---
+
+<BaseLayout 
+  title="404 - Page Not Found | NI18"
+  description="The page you are looking for does not exist or has been relocated as part of our migration."
+>
+  <section class="section error-section">
+    <div class="container error-container">
+      <div class="error-code">404</div>
+      <h1 class="headline-large error-title">Page Not Found or Migrated</h1>
+      <p class="body-large error-desc">
+        We recently upgraded the NI18 website to a faster static platform. If you followed a link to a legacy URL, we are redirecting you...
+      </p>
+
+      <div class="error-actions">
+        <MdButton href="/" variant="filled">
+          <MdIcon name="home" size="18px" />
+          <span>Return Home</span>
+        </MdButton>
+        <MdButton href="/search" variant="outlined">
+          <MdIcon name="search" size="18px" />
+          <span>Search Website</span>
+        </MdButton>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<!-- Client-side Redirect Matcher for legacy Google Sites URLs -->
+<script is:inline>
+  (function() {
+    const path = window.location.pathname.toLowerCase();
+    const mappings = {
+      '/view/ni18/home': '/',
+      '/view/ni18/home/': '/',
+      '/view/ni18/about': '/about',
+      '/view/ni18/about/': '/about',
+      '/view/ni18/services': '/services',
+      '/view/ni18/services/': '/services',
+      '/view/ni18/contact': '/contact',
+      '/view/ni18/contact/': '/contact',
+      '/view/ni18': '/',
+      '/home': '/',
+      '/home/': '/'
+    };
+
+    if (mappings[path]) {
+      window.location.replace(mappings[path]);
+    }
+  })();
+</script>
+
+<style>
+  .error-section {
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .error-container {
+    max-width: 600px;
+  }
+
+  .error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .error-title {
+    margin-bottom: 1rem;
+  }
+
+  .error-desc {
+    margin-bottom: 2rem;
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+</style>

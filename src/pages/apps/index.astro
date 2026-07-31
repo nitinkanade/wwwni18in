@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import AppsGrid from '../../components/sections/AppsGrid.astro';
+---
+
+<BaseLayout 
+  title="Android Mobile Applications | NI18"
+  description="Download and explore native Android mobile applications engineered by NI18."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Apps' }]} />
+      <h1 class="display-large">Mobile Applications</h1>
+      <p class="body-large sub-desc">Native Android applications crafted for offline reliability and smooth performance.</p>
+    </div>
+  </section>
+
+  <AppsGrid />
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+</style>

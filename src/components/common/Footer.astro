@@ -1,0 +1,214 @@
+---
+import MdIcon from '../md3/MdIcon.astro';
+
+const currentYear = new Date().getFullYear();
+
+const navSections = [
+  {
+    title: 'Company',
+    links: [
+      { name: 'About NI18', href: '/about' },
+      { name: 'Portfolio', href: '/portfolio' },
+      { name: 'Case Studies', href: '/case-studies' },
+      { name: 'Careers', href: '/careers' },
+      { name: 'Contact Us', href: '/contact' }
+    ]
+  },
+  {
+    title: 'Services',
+    links: [
+      { name: 'Android Development', href: '/services/android-app-development' },
+      { name: 'Web Applications', href: '/services/web-application-development' },
+      { name: 'SFCC Consulting', href: '/services/salesforce-commerce-cloud' },
+      { name: 'Digital Utilities', href: '/services/digital-utility-tools' },
+      { name: 'Technical SEO', href: '/services/seo-digital-marketing' }
+    ]
+  },
+  {
+    title: 'Products & Apps',
+    links: [
+      { name: 'Digital Utility Suite', href: '/products/digital-utility-suite' },
+      { name: 'SFCC Quiz Master', href: '/products/sfcc-quiz-master' },
+      { name: 'JEE Maths Formulas', href: '/apps/jee-maths-formulas-app' },
+      { name: 'MPSC Quiz Companion', href: '/apps/mpsc-quiz-master-app' },
+      { name: 'Resources Hub', href: '/resources' }
+    ]
+  },
+  {
+    title: 'Legal & Info',
+    links: [
+      { name: 'Privacy Policy', href: '/privacy-policy' },
+      { name: 'Terms of Service', href: '/terms' },
+      { name: 'Disclaimer', href: '/disclaimer' },
+      { name: 'Cookie Policy', href: '/cookie-policy' },
+      { name: 'FAQ', href: '/faq' },
+      { name: 'HTML Sitemap', href: '/sitemap' }
+    ]
+  }
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        <img src="/images/logo.svg" alt="NI18 Logo" width="140" height="35" loading="lazy" />
+      </a>
+      <p class="body-medium brand-desc">
+        Engineering high-performance native Android applications, modern Astro web experiences, SFCC solutions, and privacy-first browser utilities.
+      </p>
+      <div class="contact-info">
+        <a href="mailto:contact@ni18.in" class="contact-item">
+          <MdIcon name="mail" size="18px" />
+          <span>contact@ni18.in</span>
+        </a>
+        <a href="https://www.ni18.in" class="contact-item">
+          <MdIcon name="language" size="18px" />
+          <span>www.ni18.in</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-grid">
+      {navSections.map((section) => (
+        <div class="footer-col">
+          <h2 class="title-small col-title">{section.title}</h2>
+          <ul class="col-links">
+            {section.links.map((link) => (
+              <li>
+                <a href={link.href} class="footer-link">{link.name}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container bottom-flex">
+      <p class="body-small text-muted">
+        © {currentYear} NI18 Technologies. All rights reserved. Registered custom domain www.ni18.in.
+      </p>
+      <div class="bottom-links">
+        <a href="/rss.xml" class="body-small footer-link">RSS Feed</a>
+        <a href="/sitemap-index.xml" class="body-small footer-link">XML Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--md-sys-color-surface-container-lowest);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    padding-top: 4rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-content {
+      grid-template-columns: 320px 1fr;
+    }
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .brand-desc {
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .col-title {
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .col-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer-link {
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--md-sys-color-primary);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    padding: 1.5rem 0;
+    background-color: var(--md-sys-color-surface-container-low);
+  }
+
+  .bottom-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .bottom-flex {
+      flex-direction: row;
+    }
+  }
+
+  .text-muted {
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .bottom-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+</style>

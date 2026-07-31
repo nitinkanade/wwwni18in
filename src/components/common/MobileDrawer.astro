@@ -1,0 +1,195 @@
+---
+import MdIcon from '../md3/MdIcon.astro';
+import MdButton from '../md3/MdButton.astro';
+
+const pathname = new URL(Astro.request.url).pathname;
+
+const navItems = [
+  { name: 'Home', href: '/', icon: 'home' },
+  { name: 'About', href: '/about', icon: 'info' },
+  { name: 'Services', href: '/services', icon: 'auto_awesome' },
+  { name: 'Products', href: '/products', icon: 'widgets' },
+  { name: 'Apps', href: '/apps', icon: 'smartphone' },
+  { name: 'Portfolio', href: '/portfolio', icon: 'work' },
+  { name: 'Case Studies', href: '/case-studies', icon: 'assessment' },
+  { name: 'Technologies', href: '/technologies', icon: 'code' },
+  { name: 'Industries', href: '/industries', icon: 'domain' },
+  { name: 'Blog', href: '/blog', icon: 'article' },
+  { name: 'Careers', href: '/careers', icon: 'groups' },
+  { name: 'Contact', href: '/contact', icon: 'mail' },
+  { name: 'Search', href: '/search', icon: 'search' }
+];
+---
+
+<button 
+  id="drawer-open-btn" 
+  class="mobile-menu-btn" 
+  aria-label="Open Mobile Menu"
+  aria-expanded="false"
+>
+  <MdIcon name="menu" size="24px" />
+</button>
+
+<div id="drawer-overlay" class="drawer-overlay" aria-hidden="true"></div>
+
+<aside id="mobile-drawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+  <div class="drawer-header">
+    <a href="/" class="drawer-logo">
+      <img src="/images/logo.svg" alt="NI18 Logo" width="120" height="30" />
+    </a>
+    <button id="drawer-close-btn" class="drawer-close-btn" aria-label="Close Mobile Menu">
+      <MdIcon name="close" size="24px" />
+    </button>
+  </div>
+
+  <nav class="drawer-nav">
+    <ul>
+      {navItems.map((item) => {
+        const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+        return (
+          <li>
+            <a href={item.href} class={`drawer-link ${isActive ? 'active' : ''}`}>
+              <MdIcon name={item.icon} size="20px" />
+              <span>{item.name}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+
+  <div class="drawer-footer">
+    <MdButton href="/contact" variant="filled" class="w-full">Get in Touch</MdButton>
+  </div>
+</aside>
+
+<style>
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--md-sys-color-outline);
+    color: var(--md-sys-color-on-surface);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--md-sys-shape-corner-medium);
+    cursor: pointer;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu-btn { display: none; }
+  }
+
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .drawer-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    max-width: 85vw;
+    background-color: var(--md-sys-color-surface-container-lowest);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--md-sys-elevation-4);
+  }
+
+  .mobile-drawer.open {
+    transform: translateX(0);
+  }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .drawer-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--md-sys-color-on-surface);
+    cursor: pointer;
+  }
+
+  .drawer-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 0.75rem;
+  }
+
+  .drawer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--md-sys-shape-corner-medium);
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .drawer-link:hover, .drawer-link.active {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+  }
+
+  .drawer-footer {
+    padding: 1.25rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .w-full { width: 100%; }
+</style>
+
+<script is:inline>
+  const openBtn = document.getElementById('drawer-open-btn');
+  const closeBtn = document.getElementById('drawer-close-btn');
+  const overlay = document.getElementById('drawer-overlay');
+  const drawer = document.getElementById('mobile-drawer');
+
+  function openDrawer() {
+    drawer?.classList.add('open');
+    overlay?.classList.add('open');
+    openBtn?.setAttribute('aria-expanded', 'true');
+    overlay?.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeDrawer() {
+    drawer?.classList.remove('open');
+    overlay?.classList.remove('open');
+    openBtn?.setAttribute('aria-expanded', 'false');
+    overlay?.setAttribute('aria-hidden', 'true');
+  }
+
+  openBtn?.addEventListener('click', openDrawer);
+  closeBtn?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
+</script>

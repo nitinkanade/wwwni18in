@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import MdChip from '../../components/md3/MdChip.astro';
+import Pagination from '../../components/common/Pagination.astro';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const PAGE_SIZE = 6;
+const paginatedPosts = posts.slice(0, PAGE_SIZE);
+const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+
+const categories = [...new Set(posts.map((p) => p.data.category))];
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+---
+
+<BaseLayout 
+  title="Technical Blog & Engineering Insights | NI18"
+  description="Read programming tutorials, Android Jetpack Compose guides, SFCC developer best practices, and Web Speed optimizations from NI18."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Blog' }]} />
+      <h1 class="display-large">Engineering Blog &amp; Insights</h1>
+      <p class="body-large sub-desc">In-depth technical guides, Android tutorials, SFCC best practices, and Web performance articles.</p>
+
+      <div class="filter-bar">
+        <span class="label-large">Categories:</span>
+        <div class="chips-group">
+          {categories.map((cat) => (
+            <MdChip href={`/blog/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}>
+              {cat}
+            </MdChip>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        {paginatedPosts.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+
+      <Pagination currentPage={1} totalPages={totalPages} baseUrl="/blog" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; margin-bottom: 1.5rem; }
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+  .chips-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+</style>

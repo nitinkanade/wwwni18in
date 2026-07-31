@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hero-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" rx="24" fill="url(#hero-bg)" />
+  <!-- Glass Window Mockup -->
+  <rect x="50" y="40" width="500" height="320" rx="16" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="2"/>
+  <!-- Window Header -->
+  <circle cx="80" cy="65" r="6" fill="#ef4444"/>
+  <circle cx="100" cy="65" r="6" fill="#f59e0b"/>
+  <circle cx="120" cy="65" r="6" fill="#10b981"/>
+  <rect x="150" y="57" width="300" height="16" rx="8" fill="#334155"/>
+  <!-- Code Blocks / UI Elements -->
+  <rect x="80" y="100" width="180" height="230" rx="12" fill="#0f172a"/>
+  <rect x="95" y="120" width="120" height="12" rx="4" fill="#6366f1"/>
+  <rect x="95" y="142" width="150" height="8" rx="4" fill="#475569"/>
+  <rect x="95" y="158" width="100" height="8" rx="4" fill="#475569"/>
+  <rect x="95" y="174" width="130" height="8" rx="4" fill="#06b6d4"/>
+  
+  <rect x="280" y="100" width="240" height="105" rx="12" fill="url(#card-grad)"/>
+  <text x="300" y="140" font-family="system-ui" font-weight="700" font-size="18" fill="#ffffff">Android &amp; Cloud Excellence</text>
+  <text x="300" y="165" font-family="system-ui" font-size="12" fill="#e0e7ff">Scalable Architecture • SEO • SFCC</text>
+  
+  <rect x="280" y="220" width="110" height="110" rx="12" fill="#0f172a" stroke="#334155"/>
+  <circle cx="335" cy="265" r="22" fill="#06b6d4" fill-opacity="0.2"/>
+  <path d="M335 250v30M320 265h30" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/>
+  <text x="335" y="315" font-family="system-ui" font-size="11" fill="#94a3b8" text-anchor="middle">Fast Utilities</text>
+
+  <rect x="410" y="220" width="110" height="110" rx="12" fill="#0f172a" stroke="#334155"/>
+  <circle cx="465" cy="265" r="22" fill="#10b981" fill-opacity="0.2"/>
+  <path d="M455 265l6 6 12-12" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="465" y="315" font-family="system-ui" font-size="11" fill="#94a3b8" text-anchor="middle">Core Web Vitals</text>
+</svg>

@@ -1,0 +1,105 @@
+---
+import MdIcon from '../md3/MdIcon.astro';
+
+interface Props {
+  title: string;
+  url?: string;
+}
+
+const { title, url } = Astro.props;
+const shareUrl = url || Astro.url.href;
+const encodedUrl = encodeURIComponent(shareUrl);
+const encodedTitle = encodeURIComponent(title);
+---
+
+<div class="share-buttons-container">
+  <span class="label-large share-label">Share Article:</span>
+  <div class="buttons-group">
+    <a 
+      href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="share-btn"
+      aria-label="Share on Twitter"
+    >
+      <MdIcon name="share" size="18px" />
+      <span>Twitter / X</span>
+    </a>
+
+    <a 
+      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="share-btn"
+      aria-label="Share on LinkedIn"
+    >
+      <MdIcon name="post_add" size="18px" />
+      <span>LinkedIn</span>
+    </a>
+
+    <button id="copy-link-btn" class="share-btn" data-url={shareUrl} aria-label="Copy link">
+      <MdIcon name="content_copy" size="18px" />
+      <span id="copy-btn-text">Copy Link</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .share-buttons-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    margin: 2rem 0;
+    border-y: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .share-label {
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--md-sys-shape-corner-full);
+    border: 1px solid var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface-container-lowest);
+    color: var(--md-sys-color-on-surface);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .share-btn:hover {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border-color: var(--md-sys-color-primary);
+  }
+</style>
+
+<script is:inline>
+  const copyBtn = document.getElementById('copy-link-btn');
+  const copyText = document.getElementById('copy-btn-text');
+
+  copyBtn?.addEventListener('click', async () => {
+    const url = copyBtn.getAttribute('data-url');
+    if (url) {
+      await navigator.clipboard.writeText(url);
+      if (copyText) copyText.textContent = 'Copied!';
+      setTimeout(() => {
+        if (copyText) copyText.textContent = 'Copy Link';
+      }, 2000);
+    }
+  });
+</script>

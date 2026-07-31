@@ -1,0 +1,45 @@
+---
+interface Props {
+  type?: 'Organization' | 'WebSite' | 'Article' | 'FAQPage' | 'BreadcrumbList';
+  data?: Record<string, any>;
+}
+
+const { type = 'Organization', data = {} } = Astro.props;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  'name': 'NI18',
+  'url': 'https://www.ni18.in',
+  'logo': 'https://www.ni18.in/favicon.svg',
+  'founder': {
+    '@type': 'Person',
+    'name': 'Nikhil Sharma'
+  },
+  'sameAs': [
+    'https://github.com/ni18',
+    'https://sites.google.com/view/ni18/home'
+  ],
+  'description': 'Independent software engineering entity specializing in Android applications, web development, and Salesforce Commerce Cloud.'
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'NI18 Technologies',
+  'url': 'https://www.ni18.in',
+  'potentialAction': {
+    '@type': 'SearchAction',
+    'target': 'https://www.ni18.in/search?q={search_term_string}',
+    'query-input': 'required name=search_term_string'
+  }
+};
+
+const finalSchema = type === 'Organization' 
+  ? organizationSchema 
+  : type === 'WebSite' 
+  ? websiteSchema 
+  : { '@context': 'https://schema.org', '@type': type, ...data };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />

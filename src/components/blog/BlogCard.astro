@@ -1,0 +1,89 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import MdCard from '../md3/MdCard.astro';
+import MdBadge from '../md3/MdBadge.astro';
+import MdIcon from '../md3/MdIcon.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+});
+---
+
+<MdCard href={`/blog/${post.slug}`} variant="interactive" class="blog-card">
+  <div class="blog-card-meta">
+    <MdBadge>{post.data.category}</MdBadge>
+    <span class="pub-date">{formattedDate}</span>
+  </div>
+
+  <h3 class="title-large blog-title">{post.data.title}</h3>
+  <p class="body-medium blog-excerpt">{post.data.description}</p>
+
+  <div class="blog-footer">
+    <span class="author-name">{post.data.author}</span>
+    <div class="read-more">
+      <span>Read Article</span>
+      <MdIcon name="arrow_forward" size="16px" />
+    </div>
+  </div>
+</MdCard>
+
+<style>
+  .blog-card {
+    height: 100%;
+  }
+
+  .blog-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .pub-date {
+    font-size: 0.8rem;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .blog-title {
+    margin-bottom: 0.75rem;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .blog-excerpt {
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    font-size: 0.85rem;
+  }
+
+  .author-name {
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .read-more {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--md-sys-color-primary);
+    font-weight: 700;
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/common/Breadcrumb.astro';
+import ContactForm from '../components/sections/ContactForm.astro';
+import MdIcon from '../components/md3/MdIcon.astro';
+---
+
+<BaseLayout 
+  title="Contact NI18 | Software Engineering & Consulting"
+  description="Contact NI18 for native Android app development, modern web applications, SFCC e-commerce consulting, or speed optimization."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Contact' }]} />
+      <h1 class="display-large">Get in Touch with NI18</h1>
+      <p class="body-large sub-desc">Have a project in mind or technical questions? Reach out to our engineering team.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="contact-info-col">
+        <h2 class="headline-medium mb-2">Direct Contact Information</h2>
+        
+        <div class="info-card">
+          <MdIcon name="mail" size="24px" class="icon" />
+          <div>
+            <h4 class="title-small">Email Support</h4>
+            <p class="body-medium">contact@ni18.in</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <MdIcon name="language" size="24px" class="icon" />
+          <div>
+            <h4 class="title-small">Official Domain</h4>
+            <p class="body-medium">www.ni18.in</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <MdIcon name="location_on" size="24px" class="icon" />
+          <div>
+            <h4 class="title-small">Location</h4>
+            <p class="body-medium">India (Remote &amp; Global Consulting)</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .contact-grid { grid-template-columns: 1fr 480px; }
+  }
+  .mb-2 { margin-bottom: 1.5rem; }
+  .info-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background-color: var(--md-sys-color-surface-container-low);
+    border-radius: var(--md-sys-shape-corner-medium);
+    margin-bottom: 1rem;
+  }
+  .icon { color: var(--md-sys-color-primary); }
+</style>

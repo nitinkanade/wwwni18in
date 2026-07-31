@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps');
+  return apps.map((app) => ({
+    params: { slug: app.slug },
+    props: { app }
+  }));
+}
+
+const { app } = Astro.props;
+const { Content } = await app.render();
+---
+
+<BaseLayout 
+  title={`${app.data.title} | NI18 Apps`}
+  description={app.data.description}
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[
+        { name: 'Apps', href: '/apps' },
+        { name: app.data.title }
+      ]} />
+
+      <h1 class="display-large">{app.data.title}</h1>
+      <p class="body-large sub-desc">{app.data.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose-container">
+      <div class="prose-content">
+        <Content />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+  .prose-container { max-width: 820px; }
+</style>

@@ -1,0 +1,52 @@
+---
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import SEO from '../components/common/SEO.astro';
+import SchemaOrg from '../components/common/SchemaOrg.astro';
+import '../assets/styles/main.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  article?: boolean;
+  pubDate?: Date;
+  updatedDate?: Date;
+  author?: string;
+  canonicalUrl?: string;
+}
+
+const props = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <SEO {...props} />
+    <SchemaOrg type="Organization" />
+    <SchemaOrg type="WebSite" />
+    
+    <!-- Theme Flash Prevention Script -->
+    <script is:inline>
+      (function() {
+        const savedTheme = localStorage.getItem('ni18-theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

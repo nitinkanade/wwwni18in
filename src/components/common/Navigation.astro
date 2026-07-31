@@ -1,0 +1,79 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Services', href: '/services' },
+  { name: 'Products', href: '/products' },
+  { name: 'Apps', href: '/apps' },
+  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Case Studies', href: '/case-studies' },
+  { name: 'Technologies', href: '/technologies' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' }
+];
+---
+
+<nav class="desktop-nav" aria-label="Main Navigation">
+  <ul class="nav-list">
+    {navItems.map((item) => {
+      const isActive = item.href === '/' 
+        ? pathname === '/' 
+        : pathname.startsWith(item.href);
+      return (
+        <li>
+          <a 
+            href={item.href} 
+            class={`nav-link ${isActive ? 'active' : ''}`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {item.name}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>
+
+<style>
+  .desktop-nav {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-nav {
+      display: block;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--md-sys-shape-corner-full);
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--md-sys-color-primary);
+    background-color: var(--md-sys-color-surface-container);
+  }
+
+  .nav-link.active {
+    color: var(--md-sys-color-on-primary-container);
+    background-color: var(--md-sys-color-primary-container);
+    font-weight: 700;
+  }
+</style>

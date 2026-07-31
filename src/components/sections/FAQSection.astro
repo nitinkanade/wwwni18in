@@ -1,0 +1,109 @@
+---
+import MdCard from '../md3/MdCard.astro';
+import MdIcon from '../md3/MdIcon.astro';
+
+const faqs = [
+  { q: 'What software technologies does NI18 specialize in?', a: 'We specialize in native Android development (Kotlin & Jetpack Compose), static web application architecture (Astro & TypeScript), Salesforce Commerce Cloud (SFCC) e-commerce development, and client-side browser utilities.' },
+  { q: 'Is the website host database-free and static?', a: 'Yes. The entire website is generated as static HTML using Astro and hosted on GitHub Pages with zero backend server overhead, achieving top security and 100/100 Lighthouse scores.' },
+  { q: 'How does client-side utility security work on NI18?', a: 'All tools in the NI18 Digital Utility Suite run 100% inside your browser WebAssembly and Web Worker instances. No files or data are sent to external servers.' },
+  { q: 'Are legacy URLs from Google Sites preserved?', a: 'Yes. All indexed Google Sites URLs are mapped and preserved. Permanent client-side redirect fallbacks are configured via 404 client-side JavaScript and HTML redirect alias pages to safeguard SEO.' }
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map((f) => ({
+    '@type': 'Question',
+    'name': f.q,
+    'acceptedAnswer': {
+      '@type': 'Answer',
+      'text': f.a
+    }
+  }))
+};
+---
+
+<section class="section faq-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="label-large category-tag">FAQ</span>
+      <h2 class="headline-large">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-summary">
+            <span class="title-medium">{faq.q}</span>
+            <MdIcon name="expand_more" size="24px" class="faq-icon" />
+          </summary>
+          <div class="faq-answer">
+            <p class="body-medium">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<style>
+  .section-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3rem auto;
+  }
+
+  .category-tag {
+    color: var(--md-sys-color-primary);
+    font-weight: 700;
+  }
+
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    background-color: var(--md-sys-color-surface-container-lowest);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .faq-item[open] {
+    border-color: var(--md-sys-color-primary);
+  }
+
+  .faq-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    transition: transform 0.2s ease;
+    color: var(--md-sys-color-primary);
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+</style>

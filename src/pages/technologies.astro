@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/common/Breadcrumb.astro';
+import TechnologiesGrid from '../components/sections/TechnologiesGrid.astro';
+---
+
+<BaseLayout 
+  title="Technologies & Frameworks | NI18"
+  description="Explore the modern technology stack used by NI18: Kotlin, Jetpack Compose, Astro, TypeScript, Salesforce Commerce Cloud, and WebAssembly."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Technologies' }]} />
+      <h1 class="display-large">Our Technology Stack</h1>
+      <p class="body-large sub-desc">We leverage maintainable, high-performance open-source standards and cloud-native frameworks.</p>
+    </div>
+  </section>
+
+  <TechnologiesGrid />
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+</style>

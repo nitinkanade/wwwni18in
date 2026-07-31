@@ -1,0 +1,93 @@
+---
+import MdIcon from '../md3/MdIcon.astro';
+
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+const { currentPage, totalPages, baseUrl } = Astro.props;
+
+const prevUrl = currentPage > 1 
+  ? (currentPage === 2 ? baseUrl : `${baseUrl}/page/${currentPage - 1}`) 
+  : null;
+
+const nextUrl = currentPage < totalPages 
+  ? `${baseUrl}/page/${currentPage + 1}` 
+  : null;
+---
+
+{totalPages > 1 && (
+  <nav class="pagination-container" aria-label="Pagination Navigation">
+    {prevUrl ? (
+      <a href={prevUrl} class="page-link page-nav" aria-label="Previous Page">
+        <MdIcon name="arrow_back" size="18px" />
+        <span>Previous</span>
+      </a>
+    ) : (
+      <span class="page-link page-disabled">
+        <MdIcon name="arrow_back" size="18px" />
+        <span>Previous</span>
+      </span>
+    )}
+
+    <span class="page-info">
+      Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong>
+    </span>
+
+    {nextUrl ? (
+      <a href={nextUrl} class="page-link page-nav" aria-label="Next Page">
+        <span>Next</span>
+        <MdIcon name="arrow_forward" size="18px" />
+      </a>
+    ) : (
+      <span class="page-link page-disabled">
+        <span>Next</span>
+        <MdIcon name="arrow_forward" size="18px" />
+      </span>
+    )}
+  </nav>
+)}
+
+<style>
+  .pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .page-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--md-sys-shape-corner-full);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .page-nav {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+  }
+
+  .page-nav:hover {
+    filter: brightness(1.08);
+  }
+
+  .page-disabled {
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-outline);
+    cursor: not-allowed;
+  }
+
+  .page-info {
+    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+</style>

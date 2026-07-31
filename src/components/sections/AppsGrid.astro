@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import MdCard from '../md3/MdCard.astro';
+import MdBadge from '../md3/MdBadge.astro';
+import MdIcon from '../md3/MdIcon.astro';
+
+const apps = await getCollection('apps');
+---
+
+<section class="section apps-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="label-large category-tag">MOBILE APPLICATIONS</span>
+      <h2 class="headline-large">Native Android Mobile Apps</h2>
+      <p class="body-large section-sub">
+        Offline-first mobile applications designed with Jetpack Compose and Material Design 3.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      {apps.map((app) => (
+        <MdCard href={`/apps/${app.slug}`} variant="interactive">
+          <div class="app-card-top">
+            <div class="app-icon">
+              <MdIcon name={app.data.icon} size="36px" />
+            </div>
+            <div class="app-meta">
+              <MdBadge>{app.data.platform}</MdBadge>
+              <h3 class="title-large app-title">{app.data.title}</h3>
+              <p class="body-medium">{app.data.description}</p>
+            </div>
+          </div>
+
+          <div class="app-stats-row">
+            {app.data.rating && (
+              <div class="app-stat">
+                <MdIcon name="star" size="16px" class="star" />
+                <span>{app.data.rating}</span>
+              </div>
+            )}
+            {app.data.downloads && (
+              <div class="app-stat">
+                <MdIcon name="download" size="16px" />
+                <span>{app.data.downloads} Downloads</span>
+              </div>
+            )}
+          </div>
+        </MdCard>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .apps-section {
+    background-color: var(--md-sys-color-surface-container-low);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3rem auto;
+  }
+
+  .category-tag {
+    color: var(--md-sys-color-primary);
+    font-weight: 700;
+  }
+
+  .app-card-top {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .app-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--md-sys-shape-corner-large);
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .app-title {
+    margin-top: 0.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .app-stats-row {
+    margin-top: auto;
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .app-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .star {
+    color: #f59e0b;
+  }
+</style>

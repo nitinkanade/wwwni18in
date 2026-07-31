@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/common/Breadcrumb.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+---
+
+<BaseLayout 
+  title="Frequently Asked Questions (FAQ) | NI18"
+  description="Find answers to common questions about NI18 Android applications, Astro web engineering, SFCC consulting, and privacy-first utilities."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'FAQ' }]} />
+      <h1 class="display-large">Frequently Asked Questions</h1>
+      <p class="body-large sub-desc">Everything you need to know about NI18 products, services, security, and performance.</p>
+    </div>
+  </section>
+
+  <FAQSection />
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+</style>

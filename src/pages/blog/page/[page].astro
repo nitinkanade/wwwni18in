@@ -1,0 +1,52 @@
+---
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/common/Breadcrumb.astro';
+import BlogCard from '../../../components/blog/BlogCard.astro';
+import Pagination from '../../../components/common/Pagination.astro';
+
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return paginate(posts, { pageSize: 6 });
+}
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>;
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout 
+  title={`Blog Page ${page.currentPage} | NI18`}
+  description="Explore technical articles, Android guides, and web development insights."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[
+        { name: 'Blog', href: '/blog' },
+        { name: `Page ${page.currentPage}` }
+      ]} />
+      <h1 class="display-large">Blog Articles - Page {page.currentPage}</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        {page.data.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+
+      <Pagination currentPage={page.currentPage} totalPages={page.lastPage} baseUrl="/blog" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+</style>

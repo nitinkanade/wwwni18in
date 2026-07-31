@@ -1,0 +1,111 @@
+/* Material Design 3 (MD3) Token System */
+
+:root {
+  /* Color Palette - Seed: Indigo / Violet / Cyan */
+  --md-ref-palette-primary-100: #ffffff;
+  --md-ref-palette-primary-90: #e0e7ff;
+  --md-ref-palette-primary-80: #c7d2fe;
+  --md-ref-palette-primary-60: #818cf8;
+  --md-ref-palette-primary-50: #6366f1;
+  --md-ref-palette-primary-40: #4f46e5;
+  --md-ref-palette-primary-30: #4338ca;
+  --md-ref-palette-primary-20: #312e81;
+  --md-ref-palette-primary-10: #1e1b4b;
+
+  --md-ref-palette-neutral-99: #f8fafc;
+  --md-ref-palette-neutral-95: #f1f5f9;
+  --md-ref-palette-neutral-90: #e2e8f0;
+  --md-ref-palette-neutral-80: #cbd5e1;
+  --md-ref-palette-neutral-70: #94a3b8;
+  --md-ref-palette-neutral-50: #64748b;
+  --md-ref-palette-neutral-30: #334155;
+  --md-ref-palette-neutral-20: #1e293b;
+  --md-ref-palette-neutral-10: #0f172a;
+  --md-ref-palette-neutral-6: #090d16;
+
+  --md-ref-palette-secondary-50: #06b6d4;
+  --md-ref-palette-secondary-40: #0891b2;
+  --md-ref-palette-tertiary-50: #10b981;
+
+  /* Typography Scale */
+  --md-sys-typescale-font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --md-sys-typescale-font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Corner Shape System */
+  --md-sys-shape-corner-none: 0px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
+
+  /* Motion & Duration */
+  --md-sys-motion-duration-short: 150ms;
+  --md-sys-motion-duration-medium: 300ms;
+  --md-sys-motion-duration-long: 500ms;
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
+}
+
+/* Light Theme System Roles */
+[data-theme='light'] {
+  --md-sys-color-primary: #4f46e5;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #e0e7ff;
+  --md-sys-color-on-primary-container: #1e1b4b;
+
+  --md-sys-color-secondary: #0891b2;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #cffafe;
+  --md-sys-color-on-secondary-container: #164e63;
+
+  --md-sys-color-surface: #f8fafc;
+  --md-sys-color-on-surface: #0f172a;
+  --md-sys-color-surface-variant: #f1f5f9;
+  --md-sys-color-on-surface-variant: #334155;
+  --md-sys-color-outline: #cbd5e1;
+  --md-sys-color-outline-variant: #e2e8f0;
+
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f8fafc;
+  --md-sys-color-surface-container: #f1f5f9;
+  --md-sys-color-surface-container-high: #e2e8f0;
+  --md-sys-color-surface-container-highest: #cbd5e1;
+
+  --md-sys-elevation-1: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --md-sys-elevation-2: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
+  --md-sys-elevation-3: 0 10px 15px -3px rgba(15, 23, 42, 0.12), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+  --md-sys-elevation-4: 0 20px 25px -5px rgba(15, 23, 42, 0.15), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+}
+
+/* Dark Theme System Roles */
+[data-theme='dark'] {
+  --md-sys-color-primary: #818cf8;
+  --md-sys-color-on-primary: #1e1b4b;
+  --md-sys-color-primary-container: #312e81;
+  --md-sys-color-on-primary-container: #e0e7ff;
+
+  --md-sys-color-secondary: #22d3ee;
+  --md-sys-color-on-secondary: #164e63;
+  --md-sys-color-secondary-container: #0891b2;
+  --md-sys-color-on-secondary-container: #cffafe;
+
+  --md-sys-color-surface: #0b0f19;
+  --md-sys-color-on-surface: #f8fafc;
+  --md-sys-color-surface-variant: #1e293b;
+  --md-sys-color-on-surface-variant: #cbd5e1;
+  --md-sys-color-outline: #334155;
+  --md-sys-color-outline-variant: #1e293b;
+
+  --md-sys-color-surface-container-lowest: #070a12;
+  --md-sys-color-surface-container-low: #0f172a;
+  --md-sys-color-surface-container: #1e293b;
+  --md-sys-color-surface-container-high: #334155;
+  --md-sys-color-surface-container-highest: #475569;
+
+  --md-sys-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-2: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --md-sys-elevation-3: 0 10px 20px rgba(0, 0, 0, 0.5);
+  --md-sys-elevation-4: 0 20px 30px rgba(0, 0, 0, 0.6);
+}

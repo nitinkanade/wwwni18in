@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/common/Breadcrumb.astro';
+---
+
+<BaseLayout 
+  title="Search NI18 Website | Static Fast Search"
+  description="Search all pages, services, products, native apps, and blog articles across the NI18 website."
+>
+  <section class="section page-header">
+    <div class="container">
+      <Breadcrumb items={[{ name: 'Search' }]} />
+      <h1 class="display-large">Search NI18</h1>
+      <p class="body-large sub-desc">Instant client-side static search across all services, articles, products, and documentation.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container search-container">
+      <div id="search"></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    // Dynamically initialize Pagefind UI
+    if (window.PagefindUI) {
+      new window.PagefindUI({
+        element: "#search",
+        showImages: false,
+        showSubResults: true,
+        highlightParam: "highlight"
+      });
+    } else {
+      const searchContainer = document.getElementById('search');
+      if (searchContainer) {
+        searchContainer.innerHTML = '<div class="pagefind-fallback"><p class="body-medium">Search index will be generated upon running <code>npm run build</code>.</p></div>';
+      }
+    }
+  });
+</script>
+
+<!-- Pagefind JS & CSS CDN script fallback for dev / build injection -->
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+
+<style>
+  .page-header { background-color: var(--md-sys-color-surface-container-low); }
+  .sub-desc { margin-top: 0.75rem; }
+  .search-container { max-width: 800px; }
+  .pagefind-fallback {
+    padding: 2rem;
+    background-color: var(--md-sys-color-surface-container-lowest);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+    text-align: center;
+  }
+</style>
