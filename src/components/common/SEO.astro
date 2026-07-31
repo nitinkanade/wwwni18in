@@ -19,14 +19,20 @@ const {
   article = false,
   pubDate,
   updatedDate,
-  author = 'NI18 Technologies',
+  author = 'NI18',
   canonicalUrl
 } = Astro.props;
 
-const siteTitle = title.includes('NI18') ? title : `${title} | NI18 Technologies`;
+const siteTitle = title.includes('NI18') ? title : `${title} | NI18`;
 const currentCanonical = canonicalUrl || new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(getUrl(image), Astro.site).href;
 ---
+
+<!-- Performance & Core Web Vitals Pre-connects -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
 <!-- Primary Meta Tags -->
 <title>{siteTitle}</title>
@@ -36,13 +42,19 @@ const ogImageUrl = new URL(getUrl(image), Astro.site).href;
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={currentCanonical} />
 
+<!-- Strict Search Engine Crawling Rules -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
 <!-- OpenGraph / Facebook -->
 <meta property="og:type" content={article ? 'article' : 'website'} />
 <meta property="og:url" content={currentCanonical} />
 <meta property="og:title" content={siteTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageUrl} />
-<meta property="og:site_name" content="NI18 Technologies" />
+<meta property="og:site_name" content="NI18 Mobile Apps" />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter Cards -->
 <meta property="twitter:card" content="summary_large_image" />

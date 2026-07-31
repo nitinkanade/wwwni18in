@@ -1,36 +1,37 @@
 ---
+import { getUrl } from '../../utils/navigation';
+
 interface Props {
-  type?: 'Organization' | 'WebSite' | 'Article' | 'FAQPage' | 'BreadcrumbList';
+  type?: 'Organization' | 'WebSite' | 'Article' | 'FAQPage' | 'BreadcrumbList' | 'SoftwareApplication';
   data?: Record<string, any>;
 }
 
 const { type = 'Organization', data = {} } = Astro.props;
 
+const siteUrl = Astro.site ? Astro.site.href : 'https://nitinkanade.github.io/wwwni18in/';
+
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   'name': 'NI18',
-  'url': 'https://www.ni18.in',
-  'logo': 'https://www.ni18.in/favicon.svg',
-  'founder': {
-    '@type': 'Person',
-    'name': 'Nikhil Sharma'
-  },
+  'url': siteUrl,
+  'logo': new URL(getUrl('/favicon.svg'), siteUrl).href,
   'sameAs': [
-    'https://github.com/ni18',
+    'https://play.google.com/store/apps/dev?id=9029737187135646839',
+    'https://github.com/nitinkanade/wwwni18in',
     'https://sites.google.com/view/ni18/home'
   ],
-  'description': 'Independent software engineering entity specializing in Android applications, web development, and Salesforce Commerce Cloud.'
+  'description': 'Independent Android software publisher engineering native mobile applications for competitive exam prep and language learning.'
 };
 
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  'name': 'NI18 Technologies',
-  'url': 'https://www.ni18.in',
+  'name': 'NI18 Mobile Apps Portfolio',
+  'url': siteUrl,
   'potentialAction': {
     '@type': 'SearchAction',
-    'target': 'https://www.ni18.in/search?q={search_term_string}',
+    'target': `${siteUrl}search?q={search_term_string}`,
     'query-input': 'required name=search_term_string'
   }
 };
