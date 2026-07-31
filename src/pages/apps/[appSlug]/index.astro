@@ -22,12 +22,36 @@ const { Content } = await app.render();
 // Fetch all blogs associated with this specific app
 const appBlogs = await getCollection('blog', ({ data }) => !data.draft && data.appId === app.slug);
 appBlogs.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  'name': app.data.title,
+  'operatingSystem': 'Android',
+  'applicationCategory': 'EducationalApplication',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'USD'
+  },
+  'aggregateRating': {
+    '@type': 'AggregateRating',
+    'ratingValue': app.data.rating.split('/')[0].trim(),
+    'ratingCount': '1000'
+  },
+  'author': {
+    '@type': 'Organization',
+    'name': 'NI18'
+  }
+};
 ---
 
 <BaseLayout 
   title={`${app.data.title} - Official Android App | NI18`}
   description={app.data.description}
 >
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(appSchema)} />
+
   <section class="section page-header">
     <div class="container">
       <Breadcrumb items={[

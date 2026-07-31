@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <!-- Dark Gradient Background -->
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg-grad)" />
+
+  <!-- Subtle Grid Pattern -->
+  <g opacity="0.05">
+    <path d="M0 100 H1200 M0 200 H1200 M0 300 H1200 M0 400 H1200 M0 500 H1200" stroke="#ffffff" stroke-width="1" />
+    <path d="M200 0 V630 M400 0 V630 M600 0 V630 M800 0 V630 M1000 0 V630" stroke="#ffffff" stroke-width="1" />
+  </g>
+
+  <!-- NI18 Mark Container -->
+  <g transform="translate(100, 180) scale(0.65)">
+    <rect width="500" height="500" rx="90" fill="url(#brand-grad)" />
+    <g transform="translate(45, 65)">
+      <path d="M30 340 V200 C30 160 55 135 90 135 C125 135 150 160 150 200 V340 H105 V215 C105 192 94 180 78 180 C62 180 50 192 50 215 V340 Z" fill="#ffffff" />
+      <circle cx="205" cy="95" r="26" fill="#ffffff" />
+      <rect x="184" y="135" width="42" height="205" rx="6" fill="#ffffff" />
+      <g transform="rotate(-3, 340, 210)">
+        <rect x="250" y="50" width="180" height="250" rx="14" fill="#ffffff" />
+        <path d="M282 110 H312 V250 H282 Z M282 110 L268 128 H282 Z" fill="#6366f1" />
+        <path d="M362 110 C338 110 324 122 324 141 C324 158 336 169 355 175 C333 182 319 196 319 217 C319 242 338 257 367 257 C396 257 415 242 415 217 C415 196 401 182 379 175 C398 169 410 158 410 141 C410 122 396 110 362 110 Z M362 136 C376 136 384 143 384 152 C384 161 376 168 362 168 C348 168 340 161 340 152 C340 143 348 136 362 136 Z M365 190 C381 190 389 198 389 211 C389 224 381 232 365 232 C349 232 341 224 341 224 C341 198 349 190 365 190 Z" fill="#6366f1" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Typography Content -->
+  <text x="480" y="270" font-family="Inter, system-ui, sans-serif" font-size="64" font-weight="900" fill="#ffffff">NI18 Mobile Apps</text>
+  <text x="480" y="340" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" fill="#cbd5e1">Native Android Educational &amp; Exam Prep Software</text>
+  
+  <rect x="480" y="390" width="320" height="48" rx="24" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" />
+  <text x="500" y="422" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#a855f7">Google Play Developer Profile</text>
+</svg>

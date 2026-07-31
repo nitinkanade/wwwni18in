@@ -1,10 +1,10 @@
-/* Pagefind MD3 Overrides */
+/* Pagefind MD3 Theme Integration */
 
 :root {
   --pagefind-ui-primary: var(--md-sys-color-primary);
   --pagefind-ui-text: var(--md-sys-color-on-surface);
   --pagefind-ui-background: var(--md-sys-color-surface-container-lowest);
-  --pagefind-ui-border: var(--md-sys-color-outline);
+  --pagefind-ui-border: var(--md-sys-color-outline-variant);
   --pagefind-ui-tag: var(--md-sys-color-primary-container);
   --pagefind-ui-border-width: 1px;
   --pagefind-ui-border-radius: 12px;
@@ -18,11 +18,19 @@
   border-radius: var(--md-sys-shape-corner-medium) !important;
   border: 1px solid var(--md-sys-color-outline) !important;
   padding: 0.85rem 1rem !important;
+  font-size: 1rem !important;
+}
+
+.pagefind-ui .pagefind-ui__search-input:focus {
+  border-color: var(--md-sys-color-primary) !important;
+  box-shadow: 0 0 0 3px var(--md-sys-color-primary-container) !important;
+  outline: none !important;
 }
 
 .pagefind-ui .pagefind-ui__result-link {
   color: var(--md-sys-color-primary) !important;
   font-weight: 700 !important;
+  font-size: 1.1rem !important;
   text-decoration: none !important;
 }
 
@@ -32,4 +40,22 @@
 
 .pagefind-ui .pagefind-ui__result-excerpt {
   color: var(--md-sys-color-on-surface-variant) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+}
+
+.pagefind-ui .pagefind-ui__result-title {
+  margin-bottom: 0.35rem !important;
+}
+
+.pagefind-ui .pagefind-ui__result {
+  border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+  padding: 1.25rem 0 !important;
+}
+
+.pagefind-ui mark {
+  background-color: var(--md-sys-color-secondary-container) !important;
+  color: var(--md-sys-color-on-secondary-container) !important;
+  padding: 0.1rem 0.25rem !important;
+  border-radius: 4px !important;
 }
