@@ -1,5 +1,6 @@
 ---
 import MdIcon from '../md3/MdIcon.astro';
+import { getUrl } from '../../utils/navigation';
 
 const currentYear = new Date().getFullYear();
 
@@ -7,40 +8,40 @@ const navSections = [
   {
     title: 'Company',
     links: [
-      { name: 'About NI18', href: '/about' },
-      { name: 'Apps Portfolio', href: '/apps' },
+      { name: 'About NI18', href: getUrl('/about') },
+      { name: 'Apps Portfolio', href: getUrl('/apps') },
       { name: 'Google Play Profile', href: 'https://play.google.com/store/apps/dev?id=9029737187135646839' },
-      { name: 'FAQ', href: '/faq' },
-      { name: 'Contact Us', href: '/contact' }
+      { name: 'FAQ', href: getUrl('/faq') },
+      { name: 'Contact Us', href: getUrl('/contact') }
     ]
   },
   {
     title: 'Android Apps',
     links: [
-      { name: 'JEE Maths Formulas', href: '/apps/jee-maths-formulas' },
-      { name: 'MPSC Quiz Prep in Marathi', href: '/apps/mpsc-quiz-prep' },
-      { name: 'English Grammar Book & Tests', href: '/apps/english-grammar-book-tests' },
-      { name: 'English Grammar in Hindi', href: '/apps/english-grammar-in-hindi' },
-      { name: 'English Grammar in Marathi', href: '/apps/english-grammar-in-marathi' }
+      { name: 'JEE Maths Formulas', href: getUrl('/apps/jee-maths-formulas') },
+      { name: 'MPSC Quiz Prep in Marathi', href: getUrl('/apps/mpsc-quiz-prep') },
+      { name: 'English Grammar Book & Tests', href: getUrl('/apps/english-grammar-book-tests') },
+      { name: 'English Grammar in Hindi', href: getUrl('/apps/english-grammar-in-hindi') },
+      { name: 'English Grammar in Marathi', href: getUrl('/apps/english-grammar-in-marathi') }
     ]
   },
   {
     title: 'Technical Blog',
     links: [
-      { name: 'All Articles', href: '/blog' },
-      { name: 'JEE Maths Guides', href: '/apps/jee-maths-formulas/blog' },
-      { name: 'MPSC Exam Tips', href: '/apps/mpsc-quiz-prep/blog' },
-      { name: 'English Grammar Guides', href: '/apps/english-grammar-book-tests/blog' }
+      { name: 'All Articles', href: getUrl('/blog') },
+      { name: 'JEE Maths Guides', href: getUrl('/apps/jee-maths-formulas/blog') },
+      { name: 'MPSC Exam Tips', href: getUrl('/apps/mpsc-quiz-prep/blog') },
+      { name: 'English Grammar Guides', href: getUrl('/apps/english-grammar-book-tests/blog') }
     ]
   },
   {
     title: 'Legal & Info',
     links: [
-      { name: 'Privacy Policy', href: '/privacy-policy' },
-      { name: 'Terms of Service', href: '/terms' },
-      { name: 'Disclaimer', href: '/disclaimer' },
-      { name: 'Cookie Policy', href: '/cookie-policy' },
-      { name: 'HTML Sitemap', href: '/sitemap' }
+      { name: 'Privacy Policy', href: getUrl('/privacy-policy') },
+      { name: 'Terms of Service', href: getUrl('/terms') },
+      { name: 'Disclaimer', href: getUrl('/disclaimer') },
+      { name: 'Cookie Policy', href: getUrl('/cookie-policy') },
+      { name: 'HTML Sitemap', href: getUrl('/sitemap') }
     ]
   }
 ];
@@ -49,8 +50,8 @@ const navSections = [
 <footer class="site-footer">
   <div class="container footer-content">
     <div class="footer-brand">
-      <a href="/" class="footer-logo">
-        <img src="/images/logo.svg" alt="NI18 Logo" width="140" height="35" loading="lazy" />
+      <a href={getUrl('/')} class="footer-logo">
+        <img src={getUrl('/images/logo.svg')} alt="NI18 Logo" width="140" height="35" loading="lazy" />
       </a>
       <p class="body-medium brand-desc">
         Engineering high-performance native Android applications for competitive exams, language learning, and education. Official Google Play Console Developer Profile ID 9029737187135646839.
@@ -86,11 +87,11 @@ const navSections = [
   <div class="footer-bottom">
     <div class="container bottom-flex">
       <p class="body-small text-muted">
-        © {currentYear} NI18 Technologies. Registered custom domain www.ni18.in.
+        © {currentYear} NI18 Technologies. All rights reserved.
       </p>
       <div class="bottom-links">
-        <a href="/rss.xml" class="body-small footer-link">RSS Feed</a>
-        <a href="/sitemap-index.xml" class="body-small footer-link">XML Sitemap</a>
+        <a href={getUrl('/rss.xml')} class="body-small footer-link">RSS Feed</a>
+        <a href={getUrl('/sitemap-index.xml')} class="body-small footer-link">XML Sitemap</a>
       </div>
     </div>
   </div>

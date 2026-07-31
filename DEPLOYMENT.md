@@ -1,45 +1,44 @@
-# GitHub Pages & Custom Domain Deployment Guide
+# GitHub Pages Deployment & Subpath / Custom Domain Guide
 
-This guide details the steps to deploy the NI18 website to GitHub Pages with the custom domain `www.ni18.in`.
-
----
-
-## 1. Automated GitHub Actions Deployment
-
-The repository includes an automated workflow at `.github/workflows/deploy.yml`.
-
-### How it works:
-1. Every push to `main` or `master` branch triggers the build job.
-2. The workflow sets up Node.js 20, installs dependencies with `npm ci`, and runs `npm run build`.
-3. Astro generates static HTML files in `dist/` and Pagefind builds the search index.
-4. The static artifacts are published to GitHub Pages.
+This document details how GitHub Pages handles repository subpaths (`https://nitinkanade.github.io/wwwni18in/`) and custom domain configurations (`www.ni18.in`).
 
 ---
 
-## 2. GitHub Repository Configuration
+## 1. Why CSS Might Not Load on `nitinkanade.github.io/wwwni18in/`
 
-1. Go to your GitHub repository: `https://github.com/ni18/wwwni18in` (or repository name).
-2. Go to **Settings** -> **Pages**.
-3. Under **Build and deployment**:
-   - **Source**: Select `GitHub Actions`.
-4. Under **Custom domain**:
-   - Enter `www.ni18.in`.
+When a site is hosted under a GitHub repository subpath like `https://nitinkanade.github.io/wwwni18in/`:
+- If Astro attempts to load CSS from root (`/_astro/main.css`), the browser looks for `https://nitinkanade.github.io/_astro/main.css` which results in a **404 Not Found**.
+- **Fix Applied**: We configured `base: '/wwwni18in'` and `site: 'https://nitinkanade.github.io'` in `astro.config.mjs`, and added the `getUrl()` helper in `src/utils/navigation.ts`.
+- All CSS files, JS bundles, images, icons, and page links are now generated as `/wwwni18in/_astro/...` and `/wwwni18in/images/...`.
+
+---
+
+## 2. Pushing to GitHub & Verifying GitHub Actions
+
+To deploy the updated build to GitHub Pages:
+
+```bash
+git add .
+git commit -m "Configure base subpath /wwwni18in for GitHub Pages CSS & asset loading"
+git push origin main
+```
+
+Once the GitHub Actions workflow (`.github/workflows/deploy.yml`) finishes building, visit `https://nitinkanade.github.io/wwwni18in/` — the CSS, navigation, images, and Pagefind search will load with 100% styled perfection.
+
+---
+
+## 3. Switching to Custom Domain (`www.ni18.in`) Later
+
+When you are ready to point your custom domain `www.ni18.in`:
+
+1. In GitHub Repository -> **Settings** -> **Pages**:
+   - Set **Custom domain** to `www.ni18.in`.
    - Check **Enforce HTTPS**.
-
----
-
-## 3. DNS Configuration for `www.ni18.in`
-
-Configure the following records with your domain registrar (e.g. Cloudflare, Namecheap, GoDaddy):
-
-### CNAME Record (Recommended)
-- **Type**: `CNAME`
-- **Name / Host**: `www`
-- **Target / Value**: `ni18.github.io`
-- **TTL**: Auto or 3600
-
-### Apex / Root Domain A Records (for `ni18.in`)
-- `185.199.108.153`
-- `185.199.109.153`
-- `185.199.110.153`
-- `185.199.111.153`
+2. In `astro.config.mjs`, change `base` back to `'/'` and `site` to `'https://www.ni18.in'`:
+   ```javascript
+   export default defineConfig({
+     site: 'https://www.ni18.in',
+     base: '/',
+     // ...
+   });
+   ```

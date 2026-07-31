@@ -1,4 +1,6 @@
 ---
+import { getUrl } from '../../utils/navigation';
+
 const pathname = new URL(Astro.request.url).pathname;
 
 const navItems = [
@@ -14,13 +16,14 @@ const navItems = [
 <nav class="desktop-nav" aria-label="Main Navigation">
   <ul class="nav-list">
     {navItems.map((item) => {
+      const fullHref = getUrl(item.href);
       const isActive = item.href === '/' 
-        ? pathname === '/' 
-        : pathname.startsWith(item.href);
+        ? (pathname === getUrl('/') || pathname === getUrl('/index.html'))
+        : pathname.startsWith(fullHref);
       return (
         <li>
           <a 
-            href={item.href} 
+            href={fullHref} 
             class={`nav-link ${isActive ? 'active' : ''}`}
             aria-current={isActive ? 'page' : undefined}
           >

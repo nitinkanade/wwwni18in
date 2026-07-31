@@ -1,5 +1,6 @@
 ---
 import MdIcon from '../md3/MdIcon.astro';
+import { getUrl } from '../../utils/navigation';
 
 interface BreadcrumbItem {
   name: string;
@@ -19,7 +20,7 @@ const breadcrumbSchema = {
     '@type': 'ListItem',
     'position': index + 1,
     'name': item.name,
-    'item': item.href ? new URL(item.href, Astro.site).href : undefined
+    'item': item.href ? new URL(getUrl(item.href), Astro.site).href : undefined
   }))
 };
 ---
@@ -27,7 +28,7 @@ const breadcrumbSchema = {
 <nav aria-label="Breadcrumb" class="breadcrumb-container">
   <ol class="breadcrumb-list">
     <li class="breadcrumb-item">
-      <a href="/" class="breadcrumb-link">
+      <a href={getUrl('/')} class="breadcrumb-link">
         <MdIcon name="home" size="16px" />
         <span>Home</span>
       </a>
@@ -36,7 +37,7 @@ const breadcrumbSchema = {
       <li class="breadcrumb-item">
         <MdIcon name="chevron_right" size="16px" class="separator" />
         {item.href && index < items.length - 1 ? (
-          <a href={item.href} class="breadcrumb-link">{item.name}</a>
+          <a href={getUrl(item.href)} class="breadcrumb-link">{item.name}</a>
         ) : (
           <span class="breadcrumb-current" aria-current="page">{item.name}</span>
         )}

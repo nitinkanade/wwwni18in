@@ -1,6 +1,7 @@
 ---
 import MdIcon from '../md3/MdIcon.astro';
 import MdButton from '../md3/MdButton.astro';
+import { getUrl } from '../../utils/navigation';
 
 const pathname = new URL(Astro.request.url).pathname;
 
@@ -28,8 +29,8 @@ const navItems = [
 
 <aside id="mobile-drawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
   <div class="drawer-header">
-    <a href="/" class="drawer-logo">
-      <img src="/images/logo.svg" alt="NI18 Logo" width="120" height="30" />
+    <a href={getUrl('/')} class="drawer-logo">
+      <img src={getUrl('/images/logo.svg')} alt="NI18 Logo" width="120" height="30" />
     </a>
     <button id="drawer-close-btn" class="drawer-close-btn" aria-label="Close Mobile Menu">
       <MdIcon name="close" size="24px" />
@@ -39,10 +40,11 @@ const navItems = [
   <nav class="drawer-nav">
     <ul>
       {navItems.map((item) => {
-        const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+        const fullHref = getUrl(item.href);
+        const isActive = item.href === '/' ? pathname === getUrl('/') : pathname.startsWith(fullHref);
         return (
           <li>
-            <a href={item.href} class={`drawer-link ${isActive ? 'active' : ''}`}>
+            <a href={fullHref} class={`drawer-link ${isActive ? 'active' : ''}`}>
               <MdIcon name={item.icon} size="20px" />
               <span>{item.name}</span>
             </a>

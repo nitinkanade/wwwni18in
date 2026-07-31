@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import MdCard from '../md3/MdCard.astro';
 import MdBadge from '../md3/MdBadge.astro';
 import MdIcon from '../md3/MdIcon.astro';
+import { getUrl } from '../../utils/navigation';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -14,9 +15,13 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
   month: 'short',
   day: 'numeric'
 });
+
+const articleUrl = post.data.appId 
+  ? getUrl(`/apps/${post.data.appId}/blog/${post.slug}`)
+  : getUrl(`/blog/${post.slug}`);
 ---
 
-<MdCard href={`/blog/${post.slug}`} variant="interactive" class="blog-card">
+<MdCard href={articleUrl} variant="interactive" class="blog-card">
   <div class="blog-card-meta">
     <MdBadge>{post.data.category}</MdBadge>
     <span class="pub-date">{formattedDate}</span>

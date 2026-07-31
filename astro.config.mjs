@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.ni18.in',
+  site: 'https://nitinkanade.github.io',
+  base: '/wwwni18in',
   integrations: [
     mdx(),
     sitemap({

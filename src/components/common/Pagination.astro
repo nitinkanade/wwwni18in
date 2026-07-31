@@ -1,5 +1,6 @@
 ---
 import MdIcon from '../md3/MdIcon.astro';
+import { getUrl } from '../../utils/navigation';
 
 interface Props {
   currentPage: number;
@@ -10,11 +11,11 @@ interface Props {
 const { currentPage, totalPages, baseUrl } = Astro.props;
 
 const prevUrl = currentPage > 1 
-  ? (currentPage === 2 ? baseUrl : `${baseUrl}/page/${currentPage - 1}`) 
+  ? (currentPage === 2 ? getUrl(baseUrl) : getUrl(`${baseUrl}/page/${currentPage - 1}`)) 
   : null;
 
 const nextUrl = currentPage < totalPages 
-  ? `${baseUrl}/page/${currentPage + 1}` 
+  ? getUrl(`${baseUrl}/page/${currentPage + 1}`) 
   : null;
 ---
 

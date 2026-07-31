@@ -4,23 +4,24 @@ import ThemeToggle from './ThemeToggle.astro';
 import MobileDrawer from './MobileDrawer.astro';
 import MdButton from '../md3/MdButton.astro';
 import MdIcon from '../md3/MdIcon.astro';
+import { getUrl } from '../../utils/navigation';
 ---
 
 <header class="sticky-header" id="header">
   <div class="container header-container">
-    <a href="/" class="logo-link" aria-label="NI18 Homepage">
-      <img src="/images/logo.svg" alt="NI18 Technologies Logo" width="140" height="35" loading="eager" />
+    <a href={getUrl('/')} class="logo-link" aria-label="NI18 Homepage">
+      <img src={getUrl('/images/logo.svg')} alt="NI18 Technologies Logo" width="140" height="35" loading="eager" />
     </a>
 
     <Navigation />
 
     <div class="header-actions">
-      <a href="/search" class="search-btn" aria-label="Search NI18 Website">
+      <a href={getUrl('/search')} class="search-btn" aria-label="Search NI18 Website">
         <MdIcon name="search" size="20px" />
       </a>
       <ThemeToggle />
       <div class="cta-desktop">
-        <MdButton href="/contact" variant="filled">Contact Us</MdButton>
+        <MdButton href={getUrl('/contact')} variant="filled">Contact Us</MdButton>
       </div>
       <MobileDrawer />
     </div>
