@@ -13,4 +13,4 @@ NI18 specializes in custom Android app development (Kotlin & Jetpack Compose), s
 All utilities in the NI18 Digital Utility Suite process data 100% locally in your browser. Files, text, and JSON structures are never uploaded to any server.
 
 ### How can I hire NI18 for custom development?
-You can fill out the contact form on our [/contact](/contact) page or email us at contact@ni18.in.
+You can fill out the contact form on our [/contact](/contact) page or email us at ask.ni18.in@gmail.com.

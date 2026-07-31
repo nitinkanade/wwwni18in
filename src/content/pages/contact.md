@@ -6,4 +6,4 @@ lastUpdated: 2026-07-31
 
 ## Let's Build Something Exceptional Together
 
-Have questions about our Android apps, web application development services, or e-commerce consulting? Send us a message below or email us directly at **contact@ni18.in**.
+Have questions about our Android apps or feedback? Send us a message below or email us directly at **ask.ni18.in@gmail.com**.
