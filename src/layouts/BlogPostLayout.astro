@@ -7,6 +7,7 @@ import ShareButtons from '../components/blog/ShareButtons.astro';
 import AuthorBio from '../components/blog/AuthorBio.astro';
 import SchemaOrg from '../components/common/SchemaOrg.astro';
 import MdBadge from '../components/md3/MdBadge.astro';
+import { getUrl } from '../utils/navigation';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -39,7 +40,7 @@ const articleSchema = {
     'name': 'NI18',
     'logo': {
       '@type': 'ImageObject',
-      'url': 'https://www.ni18.in/favicon.svg'
+      'url': 'https://nitinkanade.github.io/wwwni18in/favicon.svg'
     }
   }
 };
@@ -59,8 +60,8 @@ const articleSchema = {
     <header class="post-header section">
       <div class="container">
         <Breadcrumb items={[
-          { name: 'Blog', href: '/blog' },
-          { name: category, href: `/blog/category/${category.toLowerCase()}` },
+          { name: 'Blog', href: getUrl('/blog') },
+          { name: category, href: getUrl(`/blog/category/${category.toLowerCase().replace(/\s+/g, '-')}`) },
           { name: title }
         ]} />
 

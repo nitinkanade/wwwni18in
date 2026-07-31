@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://nitinkanade.github.io/wwwni18in/sitemap-index.xml
 Sitemap: https://www.ni18.in/sitemap-index.xml
